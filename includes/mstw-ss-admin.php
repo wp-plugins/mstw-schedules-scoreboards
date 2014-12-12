@@ -170,7 +170,7 @@ function mstw_ss_updated_messages( $messages ) {
 	$messages['mstw_ss_sport'] = array( );
 	$messages['mstw_ss_venue'] = array( );
 	
-	return $messages;
+	//return $messages;
 	
 	//
 	// Just keeping all this for fun. Ya never know ...
@@ -246,7 +246,65 @@ function mstw_ss_updated_messages( $messages ) {
 	);
 
 	return $messages;
-}
+} //End: mstw_ss_updated_messages()
+
+//
+// Just keeping all this for fun. Ya never know ...
+//
+add_filter( 'bulk_post_updated_messages', 'mstw_ss_bulk_post_updated_messages', 10, 2 );
+function mstw_ss_bulk_post_updated_messages( $messages, $bulk_counts ) {
+
+	$messages['mstw_ss_schedule'] = array( );
+	$messages['mstw_ss_team'] = array( );
+	$messages['mstw_ss_game'] = array( );
+	$messages['mstw_ss_sport'] = array( );
+	$messages['mstw_ss_venue'] = array( );
+	
+    $messages['mstw_ss_schedule'] = array(
+        'updated'   => _n( '%s schedule updated.', '%s schedules updated.', $bulk_counts['updated'], 'mstw-schedules-scoreboards' ),
+        'locked'    => _n( '%s schedule not updated, somebody is editing it.', '%s schedules not updated, somebody is editing them.', $bulk_counts['locked'], 'mstw-schedules-scoreboards' ),
+        'deleted'   => _n( '%s schedule permanently deleted.', '%s schedules permanently deleted.', $bulk_counts['deleted'], 'mstw-schedules-scoreboards' ),
+        'trashed'   => _n( '%s schedule moved to the Trash.', '%s schedules moved to the Trash.', $bulk_counts['trashed'], 'mstw-schedules-scoreboards' ),
+        'untrashed' => _n( '%s schedule restored from the Trash.', '%s schedules restored from the Trash.', $bulk_counts['untrashed'], 'mstw-schedules-scoreboards' ),
+    );
+	
+	$messages['mstw_ss_team'] = array(
+        'updated'   => _n( '%s team updated.', '%s teams updated.', $bulk_counts['updated'], 'mstw-schedules-scoreboards' ),
+        'locked'    => _n( '%s team not updated, somebody is editing it.', '%s teams not updated, somebody is editing them.', $bulk_counts['locked'], 'mstw-schedules-scoreboards' ),
+        'deleted'   => _n( '%s team permanently deleted.', '%s teams permanently deleted.', $bulk_counts['deleted'], 'mstw-schedules-scoreboards' ),
+        'trashed'   => _n( '%s team moved to the Trash.', '%s teams moved to the Trash.', $bulk_counts['trashed'], 'mstw-schedules-scoreboards' ),
+        'untrashed' => _n( '%s team restored from the Trash.', '%s teams restored from the Trash.', $bulk_counts['untrashed'], 'mstw-schedules-scoreboards' ),
+    );
+	
+	$messages['mstw_ss_game'] = array(
+        'updated'   => _n( '%s game updated.', '%s games updated.', $bulk_counts['updated'], 'mstw-schedules-scoreboards' ),
+        'locked'    => _n( '%s game not updated, somebody is editing it.', '%s games not updated, somebody is editing them.', $bulk_counts['locked'], 'mstw-schedules-scoreboards' ),
+        'deleted'   => _n( '%s game permanently deleted.', '%s games permanently deleted.', $bulk_counts['deleted'], 'mstw-schedules-scoreboards' ),
+        'trashed'   => _n( '%s game moved to the Trash.', '%s games moved to the Trash.', $bulk_counts['trashed'], 'mstw-schedules-scoreboards' ),
+        'untrashed' => _n( '%s game restored from the Trash.', '%s games restored from the Trash.', $bulk_counts['untrashed'], 'mstw-schedules-scoreboards' ),
+    );
+	
+	$messages['mstw_ss_sport'] = array(
+        'updated'   => _n( '%s sport updated.', '%s sports updated.', $bulk_counts['updated'], 'mstw-schedules-scoreboards' ),
+        'locked'    => _n( '%s sport not updated, somebody is editing it.', '%s sports not updated, somebody is editing them.', $bulk_counts['locked'], 'mstw-schedules-scoreboards' ),
+        'deleted'   => _n( '%s sport permanently deleted.', '%s sports permanently deleted.', $bulk_counts['deleted'], 'mstw-schedules-scoreboards' ),
+        'trashed'   => _n( '%s sport moved to the Trash.', '%s sports moved to the Trash.', $bulk_counts['trashed'], 'mstw-schedules-scoreboards' ),
+        'untrashed' => _n( '%s sport restored from the Trash.', '%s sports restored from the Trash.', $bulk_counts['untrashed'], 'mstw-schedules-scoreboards' ),
+    );
+	
+	$messages['mstw_ss_venue'] = array(
+        'updated'   => _n( '%s venue updated.', '%s venues updated.', $bulk_counts['updated'], 'mstw-schedules-scoreboards' ),
+        'locked'    => _n( '%s venue not updated, somebody is editing it.', '%s venues not updated, somebody is editing them.', $bulk_counts['locked'], 'mstw-schedules-scoreboards' ),
+        'deleted'   => _n( '%s venue permanently deleted.', '%s venues permanently deleted.', $bulk_counts['deleted'], 'mstw-schedules-scoreboards' ),
+        'trashed'   => _n( '%s venue moved to the Trash.', '%s venues moved to the Trash.', $bulk_counts['trashed'], 'mstw-schedules-scoreboards' ),
+        'untrashed' => _n( '%s venue restored from the Trash.', '%s venues restored from the Trash.', $bulk_counts['untrashed'], 'mstw-schedules-scoreboards' ),
+    );
+
+    return $messages;
+
+} //End: mstw_ss_bulk_post_updated_messages()
+
+
 
 //----------------------------------------------------------------	
 // Enqueue styles and scripts for the color & date pickers. 

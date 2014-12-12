@@ -98,24 +98,9 @@ add_action( 'save_post_mstw_ss_sport', 'mstw_ss_save_sport_meta', 20, 2 );
 
 function mstw_ss_save_sport_meta( $post_id, $post ) {
 
-	/*
-	mstw_log_msg( 'IN MSTW_SAVE_SPORT_META ...' );
-	if( defined('DOING_AUTOSAVE') && DOING_AUTOSAVE ) {
-		mstw_log_msg( 'autosave: ' . defined('DOING_AUTOSAVE') && DOING_AUTOSAVE );
-	}
-	else {
-		mstw_log_msg( 'NOT defined(\'DOING_AUTOSAVE\') && DOING_AUTOSAVE' );
-	}
-	mstw_log_msg( 'isset( $_POST[\'mstw_ss_sport_nonce\'] = ' . isset( $_POST['mstw_ss_sport_nonce'] ) );
-	if ( isset( $_POST['mstw_ss_sport_nonce'] ) ) {
-		mstw_log_msg( 'plugins_url( __FILE__ ) = ' . plugins_url( __FILE__ ) );
-		mstw_log_msg( 'check_admin_referer( plugins_url(__FILE__), \'mstw_ss_sport_nonce\' ) = ' . check_admin_referer( plugins_url(__FILE__), 'mstw_ss_sport_nonce' ) );
-	}
-	*/
-	
 	// check if this is an auto save routine. 
 	// If it is our form has not been submitted, so don't do anything
-	if ( defined('DOING_AUTOSAVE') && DOING_AUTOSAVE || $post->post_status == 'auto-draft' ) {
+	if ( defined('DOING_AUTOSAVE') && DOING_AUTOSAVE || $post->post_status == 'auto-draft' || $post->post_status == 'trash' ) {
 		mstw_log_msg( 'doing autosave ... nevermind!' );
 		return; //$post_id;
 	}
@@ -134,12 +119,13 @@ function mstw_ss_save_sport_meta( $post_id, $post ) {
 	}
 	else {
 	
-		mstw_log_msg( 'Oops! Sports nonce not valid' ); 
-		
-		mstw_ss_add_admin_notice( 'error', __( 'INVALID REFERRER. Contact system admin.', 'mstw-schedules-scoreboards') );
+		if ( strpos( wp_get_referer( ), 'trash' ) === FALSE ) {
+			mstw_log_msg( 'Oops! In mstw_ss_save_venue_meta() sport nonce not valid.' );
+			mstw_ss_add_admin_notice( 'error', __( 'Invalid referer. Contact system admin.', 'mstw-schedules-scoreboards') );
+		}
 	}
 	
-} //End: mstw_ss_save_sport_meta
+} //End: mstw_ss_save_sport_meta()
 
 // ----------------------------------------------------------------
 // Set up the View All Sports table

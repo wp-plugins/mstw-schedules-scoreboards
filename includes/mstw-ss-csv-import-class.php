@@ -180,6 +180,7 @@
 		 *	Print Message Log
 		 *-----------------------------------------------------------*/
 		function print_messages() {
+	
 			if (!empty($this->log)) {
 
 			// messages HTML {{{
@@ -302,7 +303,8 @@
 			}
 			echo '<p> Loaded .... </p>';
 			
-			var_export( $csv->getHeaders( ) );
+			//var_export( $csv->getHeaders( ) );
+			//mstw_log_msg( $csv->getHeaders() );
 
 			// pad shorter rows with empty values
 			$csv->symmetrize( );

@@ -53,5 +53,10 @@ The current version of Game Schedules has been tested on WP 4.0 with the [Unders
 
 == Changelog ==
 
+= 1.1 =
+* Removed 'invalid referer' message when deleting (move to Trash) or restoring schedules, teams, games, sports, and venues.
+* Removed extraneous debug message from admin screens when importing CSV files
+* Added internationalization to some strings and re-generated the default .pot file
+
 = 1.0 =
 * Initial release.

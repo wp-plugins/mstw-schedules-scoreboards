@@ -103,22 +103,9 @@ add_action( 'save_post_mstw_ss_schedule', 'mstw_ss_save_schedule_meta', 20, 2 );
 
 function mstw_ss_save_schedule_meta( $post_id, $post ) {
 
-	//mstw_log_msg( 'IN MSTW_SAVE_SCHEDULE_META ...' );
-	//if( defined('DOING_AUTOSAVE') && DOING_AUTOSAVE ) {
-	//	mstw_log_msg( 'autosave: ' . defined('DOING_AUTOSAVE') && DOING_AUTOSAVE );
-	//}
-	//else {
-	//	mstw_log_msg( 'NOT defined(\'DOING_AUTOSAVE\') && DOING_AUTOSAVE' );
-	//}
-	//mstw_log_msg( 'isset( $_POST[\'mstw_ss_schedule_nonce\'] = ' . isset( $_POST['mstw_ss_schedule_nonce'] ) );
-	//if ( isset( $_POST['mstw_ss_schedule_nonce'] ) ) {
-		//mstw_log_msg( 'plugins_url( __FILE__ ) = ' . plugins_url( __FILE__ ) );
-		//mstw_log_msg( 'check_admin_referer( plugins_url(__FILE__), \'mstw_ss_schedule_nonce\' ) = ' . check_admin_referer( plugins_url(__FILE__), 'mstw_ss_schedule_nonce' ) );
-	//}
-
 	// check if this is an auto save routine. 
 	// If it is our form has not been submitted, so don't do anything
-	if ( defined('DOING_AUTOSAVE') && DOING_AUTOSAVE ) {
+	if ( defined('DOING_AUTOSAVE') && DOING_AUTOSAVE || $post->post_status == 'auto-draft' || $post->post_status == 'trash' ) {
 		mstw_log_msg( 'doing autosave ... nevermind!' );
 		return; //$post_id;
 	}
@@ -157,7 +144,10 @@ function mstw_ss_save_schedule_meta( $post_id, $post ) {
 		}
 	} //End: verify nonce/context
 	else {
-		mstw_log_msg( 'Oops! Schedule nonce not valid' );
+		if ( strpos( wp_get_referer( ), 'trash' ) === FALSE ) {
+			mstw_log_msg( 'Oops! In mstw_ss_save_schedule_meta() schedule nonce not valid.' );
+			mstw_ss_add_admin_notice( 'error', __( 'Invalid referer. Contact system admin.', 'mstw-schedules-scoreboards') );
+		}
 	}
 		
 	//} //End: if( isset( _$POST['post_type] ) &&

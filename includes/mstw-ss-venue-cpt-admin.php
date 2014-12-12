@@ -54,44 +54,44 @@ function mstw_ss_create_venues_ui( $post ) {
 	$admin_fields = array(  'venue_street' => array (
 								'type' 		=> 'text',
 								'curr_value' => $venue_street,
-								'label' 	=> __( 'Street Address:', 'mstw-loc-domain' ),
+								'label' 	=> __( 'Street Address:', 'mstw-schedules-scoreboards' ),
 								'maxlength' => $std_length,
 								'size' => $std_size,
 								),
 							'venue_city' => array (
 								'type' 		=> 'text',
 								'curr_value' => $venue_city,
-								'label' 	=> __( 'City:', 'mstw-loc-domain' ),
+								'label' 	=> __( 'City:', 'mstw-schedules-scoreboards' ),
 								'maxlength' => $std_length,
 								'size' => $std_size,
 								),
 							'venue_state' => array (
 								'type' 		=> 'text',
 								'curr_value' => $venue_state,
-								'label' 	=> __( 'State:', 'mstw-loc-domain' ),
-								'desc' => __( 'For US states use 2 letter abbreviation. Can include country, e.g, "CA, US", or use only country, e.g, "UK". Check what works with Google Maps (if you aren\'t using a custom map URL).', 'mstw-loc-domain' ),
+								'label' 	=> __( 'State:', 'mstw-schedules-scoreboards' ),
+								'desc' => __( 'For US states use 2 letter abbreviation. Can include country, e.g, "CA, US", or use only country, e.g, "UK". Check what works with Google Maps (if you aren\'t using a custom map URL).', 'mstw-schedules-scoreboards' ),
 								'maxlength' => $std_length,
 								'size' => $std_size,
 								),
 							'venue_zip' => array (
 								'type' 		=> 'text',
 								'curr_value' => $venue_zip,
-								'label' 	=> __( 'Zip or Postal Code:', 'mstw-loc-domain' ),
+								'label' 	=> __( 'Zip or Postal Code:', 'mstw-schedules-scoreboards' ),
 								'maxlength' => $std_length,
 								'size' => $std_size,
 								),
 							'venue_url' => array (
 								'type' 		=> 'text',
 								'curr_value' => $venue_url,
-								'label' 	=> __( 'Venue URL:', 'mstw-loc-domain' ),
+								'label' 	=> __( 'Venue URL:', 'mstw-schedules-scoreboards' ),
 								'maxlength' => $std_length,
 								'size' => $std_size,
 								),
 							'venue_map_url' => array (
 								'type' 		=> 'text',
 								'curr_value' => $venue_map_url,
-								'label' 	=> __( 'Custom Map URL:', 'mstw-loc-domain' ),
-								'desc' => __( 'Use to override the Google map link generated from the address fields. Linked from the map thumbnail in the map column.', 'mstw-loc-domain' ),
+								'label' 	=> __( 'Custom Map URL:', 'mstw-schedules-scoreboards' ),
+								'desc' => __( 'Use to override the Google map link generated from the address fields. Linked from the map thumbnail in the map column.', 'mstw-schedules-scoreboards' ),
 								'maxlength' => $std_length,
 								'size' => $std_size,
 								),
@@ -112,11 +112,10 @@ add_action( 'save_post_mstw_ss_venue', 'mstw_ss_save_venue_meta', 20, 2 );
 //add_action( 'save_post_mstw_ss_venue', 'mstw_ss_validate_venue_meta', 10, 2 ); 
 
 function mstw_ss_save_venue_meta( $post_id, $post ) {
-	//mstw_log_msg( 'IN MSTW_SAVE_VENUE_META ...' );
 	
 	// Check if this is an auto save call 
 	// If so, the form has not been submitted, so don't do anything
-	if ( ( defined('DOING_AUTOSAVE') && DOING_AUTOSAVE ) || $post->post_status == 'auto-draft' ) {
+	if ( ( defined('DOING_AUTOSAVE') && DOING_AUTOSAVE ) || $post->post_status == 'auto-draft' || $post->post_status == 'trash' ) {
 		mstw_log_msg( 'In mstw_ss_save_venue_meta ... doing autosave ... nevermind!' );
 		return; //$post_id;
 	} 	
@@ -126,7 +125,7 @@ function mstw_ss_save_venue_meta( $post_id, $post ) {
 		
 		// Not saving if title is not specified
 		if ( !isset( $_POST['post_title'] ) || empty( $_POST['post_title'] ) ) {
-			mstw_ss_add_admin_notice( $type = 'error', __( 'A TITLE is necessary. Please enter one.', 'mstw-loc-domain' ) );
+			mstw_ss_add_admin_notice( $type = 'error', __( 'A TITLE is necessary. Please enter one.', 'mstw-schedules-scoreboards' ) );
 			return;
 		}
 		
@@ -143,19 +142,20 @@ function mstw_ss_save_venue_meta( $post_id, $post ) {
 			sanitize_text_field( esc_attr( $_POST['venue_zip'] ) ) );
 			
 		mstw_validate_url( $_POST, 'venue_map_url', $post_id, 'error', 
-							  __( 'Invalid map URL:', 'mstw-loc-domain' ) );
+							  __( 'Invalid map URL:', 'mstw-schedules-scoreboards' ) );
 		
 		mstw_validate_url( $_POST, 'venue_url', $post_id, 'error', 
-							  __( 'Invalid venue URL:', 'mstw-loc-domain' ) );
+							  __( 'Invalid venue URL:', 'mstw-schedules-scoreboards' ) );
 
-		mstw_ss_add_admin_notice( 'updated', __( 'Venue saved.', 'mstw-loc-domain') );							  
+		mstw_ss_add_admin_notice( 'updated', __( 'Venue saved.', 'mstw-schedules-scoreboards') );							  
 		
 	} //End: verify nonce/context (valid nonce)
 	
 	else {
-	
-		mstw_log_msg( 'Oops! In mstw_ss_save_venue_meta() venue nonce not valid.' );
-		mstw_ss_add_admin_notice( 'error', __( 'Invalid referrer. Contact system admin.', 'mstw-loc-domain') );
+		if ( strpos( wp_get_referer( ), 'trash' ) === FALSE ) {
+			mstw_log_msg( 'Oops! In mstw_ss_save_venue_meta() venue nonce not valid.' );
+			mstw_ss_add_admin_notice( 'error', __( 'Invalid referer. Contact system admin.', 'mstw-schedules-scoreboards') );
+		}
 	}
 	
 } //End: mstw_ss_save_venue_meta( )
@@ -181,14 +181,14 @@ function mstw_ss_edit_venues_columns( $columns ) {
 
 	$columns = array(
 		'cb' => '<input type="checkbox" />',
-		'title' => __( 'Venue', 'mstw-loc-domain' ),
-		'street' => __( 'Street', 'mstw-loc-domain' ),
-		'city' => __( 'City', 'mstw-loc-domain' ),
-		'state' => __( 'State', 'mstw-loc-domain' ),
-		'zip' => __( 'Zip/Postal Code', 'mstw-loc-domain' ),
-		'venue_map_url' => __( 'Custom Map URL', 'mstw-loc-domain' ),
-		'venue_url' => __( 'Venue URL', 'mstw-loc-domain' ),
-		'venue_groups' => __( 'Groups', 'mstw-loc-domain' ),
+		'title' => __( 'Venue', 'mstw-schedules-scoreboards' ),
+		'street' => __( 'Street', 'mstw-schedules-scoreboards' ),
+		'city' => __( 'City', 'mstw-schedules-scoreboards' ),
+		'state' => __( 'State', 'mstw-schedules-scoreboards' ),
+		'zip' => __( 'Zip/Postal Code', 'mstw-schedules-scoreboards' ),
+		'venue_map_url' => __( 'Custom Map URL', 'mstw-schedules-scoreboards' ),
+		'venue_url' => __( 'Venue URL', 'mstw-schedules-scoreboards' ),
+		'venue_groups' => __( 'Groups', 'mstw-schedules-scoreboards' ),
 		);
 
 	return $columns;
@@ -209,7 +209,7 @@ function mstw_ss_manage_venues_columns( $column, $post_id ) {
 		case 'street' :
 			$venue_street = get_post_meta( $post_id, 'venue_street', true );
 			if ( empty( $venue_street ) )
-				echo __( 'No Street Address', 'mstw-loc-domain' );
+				echo __( 'No Street Address', 'mstw-schedules-scoreboards' );
 			else
 				printf( '%s', $venue_street );
 			break;
@@ -218,7 +218,7 @@ function mstw_ss_manage_venues_columns( $column, $post_id ) {
 		case 'city' :
 			$venue_city = get_post_meta( $post_id, 'venue_city', true );
 			if ( empty( $venue_city ) )
-				echo __( 'No City', 'mstw-loc-domain' );
+				echo __( 'No City', 'mstw-schedules-scoreboards' );
 			else
 				printf( '%s', $venue_city );
 			break;
@@ -227,7 +227,7 @@ function mstw_ss_manage_venues_columns( $column, $post_id ) {
 		case 'state' :
 			$venue_state = get_post_meta( $post_id, 'venue_state', true );
 		if ( empty( $venue_state ) )
-				echo __( 'No State', 'mstw-loc-domain' );
+				echo __( 'No State', 'mstw-schedules-scoreboards' );
 			else
 				printf( '%s', $venue_state );
 
@@ -237,7 +237,7 @@ function mstw_ss_manage_venues_columns( $column, $post_id ) {
 		case 'zip' :
 			$venue_zip = get_post_meta( $post_id, 'venue_zip', true );
 			if ( empty( $venue_zip ) )
-				echo __( 'No Zip', 'mstw-loc-domain' );
+				echo __( 'No Zip', 'mstw-schedules-scoreboards' );
 			else
 				printf( '%s', $venue_zip );
 			break;	
@@ -246,7 +246,7 @@ function mstw_ss_manage_venues_columns( $column, $post_id ) {
 		case 'venue_map_url' :
 			$venue_map_url = get_post_meta( $post_id, 'venue_map_url', true );
 			if ( empty( $venue_map_url ) )
-				echo __( 'None (use address fields)', 'mstw-loc-domain' );
+				echo __( 'None (use address fields)', 'mstw-schedules-scoreboards' );
 			else
 				printf( '%s', $venue_map_url );
 			break;	
@@ -257,7 +257,7 @@ function mstw_ss_manage_venues_columns( $column, $post_id ) {
 			$venue_url = get_post_meta( $post_id, 'venue_url', true );
 
 			if ( empty( $venue_url ) )
-				echo __( 'No Venue URL', 'mstw-loc-domain' );
+				echo __( 'No Venue URL', 'mstw-schedules-scoreboards' );
 			else
 				printf( '%s', $venue_url );
 			break;	
@@ -275,7 +275,7 @@ function mstw_ss_manage_venues_columns( $column, $post_id ) {
 				echo implode( ', ', $groups );
 			}
 			else {
-				echo '<a href="' . $edit_link . '">' . __( 'None', 'mstw-loc-domain' ) . '</a>';
+				echo '<a href="' . $edit_link . '">' . __( 'None', 'mstw-schedules-scoreboards' ) . '</a>';
 			}
 			break;			
 			

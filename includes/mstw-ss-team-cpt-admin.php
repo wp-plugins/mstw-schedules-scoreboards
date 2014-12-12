@@ -266,11 +266,9 @@ add_action( 'save_post_mstw_ss_team', 'mstw_ss_save_team_meta', 20, 2 );
 
 function mstw_ss_save_team_meta( $post_id, $post ) {
 
-	//mstw_log_msg( 'in mstw_ss_save_team_meta ...' );
-
 	// check if this is an auto save routine. 
 	// If it is our form has not been submitted, so don't do anything
-	if ( defined('DOING_AUTOSAVE') && DOING_AUTOSAVE || $post->post_status == 'auto-draft' ) {
+	if ( defined('DOING_AUTOSAVE') && DOING_AUTOSAVE || $post->post_status == 'auto-draft' || $post->post_status == 'trash' ) {
 		mstw_log_msg( 'doing autosave ... nevermind!' );
 		return; //$post_id;
 	}
@@ -309,11 +307,13 @@ function mstw_ss_save_team_meta( $post_id, $post ) {
 		mstw_ss_add_admin_notice( 'updated', __( 'Team saved.', 'mstw-schedules-scoreboards') );
 	}
 	else {
-		mstw_log_msg( 'Oops! Nonce not valid' );
-		mstw_ss_add_admin_notice( 'error', __( 'Invalid referrer. Contact system admin.', 'mstw-schedules-scoreboards') );
+		if ( strpos( wp_get_referer( ), 'trash' ) === FALSE ) {
+			mstw_log_msg( 'Oops! In mstw_ss_save_team_meta() team nonce not valid.' );
+			mstw_ss_add_admin_notice( 'error', __( 'Invalid referer. Contact system admin.', 'mstw-schedules-scoreboards') );
+		}
 	}
 	
-} //End: mstw_ss_save_teams_meta
+} //End: mstw_ss_save_team_meta()
 
 //-----------------------------------------------------------------
 // Remove edit permalink line for the mstw_ss_team CPT because
