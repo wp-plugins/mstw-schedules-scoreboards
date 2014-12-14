@@ -4,7 +4,7 @@ Donate link: http://shoalsummitsolutions.com
 Tags: sports,games,schedule,sports teams,team schedule,countdown timer,scoreboards  
 Requires at least: 3.9.2
 Tested up to: 4.0.1
-Stable tag: 1.0
+Stable tag: 1.1
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -33,7 +33,6 @@ All the normal installation methods for WordPress plugins work. See [the install
 **IMPORTANT!** MIGRATION FROM GAME SCHEDULES AND/OR GAME LOCATIONS
 If you are upgrading, please read the migration manual page to prevent data loss.
 
-
 == Frequently Asked Questions ==
 
 [The FAQs may be found here.](http://shoalsummitsolutions.com/ss-faq/)
@@ -54,6 +53,8 @@ The current version of Game Schedules has been tested on WP 4.0 with the [Unders
 == Changelog ==
 
 = 1.1 =
+* Added Sports to the CSV import function.
+* Added Venue Groups (taxonomy) to Venues import and Scoreboards (taxonomy) to Games import.
 * Removed 'invalid referer' message when deleting (move to Trash) or restoring schedules, teams, games, sports, and venues.
 * Removed extraneous debug message from admin screens when importing CSV files
 * Added internationalization to some strings and re-generated the default .pot file

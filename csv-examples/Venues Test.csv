@@ -1,0 +1,10 @@
+venue_title,venue_slug,venue_street,venue_city,venue_state,venue_zip,venue_map_url,venue_url,venue_group
+Autzen Stadium,autzen-stadium,2700 Martin Luther King Jr Blvd,Eugene,OR,97401,http://disneyland.com,http://www.goducks.com/ViewArticle.dbml?DB_OEM_ID=500&#038;ATCLID=384585,nfc-west;pac-12;
+The Rose Bowl,the-rose-bowl,1001 Rose Bowl Drive,Pasadena,CA,91103,,http://www.rosebowlstadium.com/,pac-12;
+Candlestick Park,candlestick-park,490 Jamestown Ave,San Francisco,CA,94124,,http://www.49ers.com/stadium/,nfc-west
+Wembley Stadium,wembley-stadium,Wembley ,London,UK,HA9 0WS,,http://www.wembleystadium.com/,new-group
+LA Coliseum,los-angeles-memorial-coliseum,3911 S Figueroa St,Los Angeles,CA,90037,,http://www.lacoliseumlive.com/joomla/,pac-12;
+Husky Stadium,husky-stadium,University of Washington,Seattle,WA,98105,,,pac-12;
+CenturyLink Field,centurylink-field,800 Occidental Ave,Seattle,WA,98134,,http://centurylinkfield.com,
+FedEx Field,fedex-field,1600 Fedex Way,Landover,MD,20785,,http://www.redskins.com/fedexfield/,nfc-east;
+Metlife Stadium,metlife-stadium,1 MetLife Stadium Drive,East Rutherford,NJ,7073,,http://www.metlifestadium.com/,nfc-east;nfc-west

@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: MSTW Schedules Scoreboards\n"
-"POT-Creation-Date: 2014-12-11 20:44-0800\n"
-"PO-Revision-Date: 2014-12-11 20:45-0800\n"
+"POT-Creation-Date: 2014-12-14 14:45-0800\n"
+"PO-Revision-Date: 2014-12-14 14:45-0800\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: en_US\n"
@@ -17,11 +17,11 @@ msgstr ""
 "X-Poedit-SearchPath-0: .\n"
 "X-Poedit-SearchPath-1: includes\n"
 
-#: mstw-schedules-scoreboards.php:134
+#: mstw-schedules-scoreboards.php:138
 msgid "MSTW Admin"
 msgstr ""
 
-#: mstw-schedules-scoreboards.php:160
+#: mstw-schedules-scoreboards.php:164
 msgid "MSTW Schedules & Scoreboards Admin"
 msgstr ""
 
@@ -646,8 +646,8 @@ msgid "Venues/Locations CSV file:"
 msgstr ""
 
 #: includes/mstw-ss-csv-import-class.php:118
-#: includes/mstw-ss-csv-import-class.php:235
-#: includes/mstw-ss-csv-import-class.php:384
+#: includes/mstw-ss-csv-import-class.php:250
+#: includes/mstw-ss-csv-import-class.php:409
 msgid "Import Venues"
 msgstr ""
 
@@ -656,8 +656,8 @@ msgid "Schedules CSV file:"
 msgstr ""
 
 #: includes/mstw-ss-csv-import-class.php:134
-#: includes/mstw-ss-csv-import-class.php:241
-#: includes/mstw-ss-csv-import-class.php:431
+#: includes/mstw-ss-csv-import-class.php:256
+#: includes/mstw-ss-csv-import-class.php:482
 msgid "Import Schedules"
 msgstr ""
 
@@ -670,8 +670,8 @@ msgid "Image Directory(URL):"
 msgstr ""
 
 #: includes/mstw-ss-csv-import-class.php:155
-#: includes/mstw-ss-csv-import-class.php:248
-#: includes/mstw-ss-csv-import-class.php:405
+#: includes/mstw-ss-csv-import-class.php:263
+#: includes/mstw-ss-csv-import-class.php:430
 msgid "Import Teams"
 msgstr ""
 
@@ -680,56 +680,70 @@ msgid "Games CSV file:"
 msgstr ""
 
 #: includes/mstw-ss-csv-import-class.php:170
-#: includes/mstw-ss-csv-import-class.php:262
-#: includes/mstw-ss-csv-import-class.php:459
+#: includes/mstw-ss-csv-import-class.php:277
+#: includes/mstw-ss-csv-import-class.php:510
 msgid "Import Games"
 msgstr ""
 
-#: includes/mstw-ss-csv-import-class.php:239
+#: includes/mstw-ss-csv-import-class.php:181
+msgid "Sports CSV file:"
+msgstr ""
+
+#: includes/mstw-ss-csv-import-class.php:185
+#: includes/mstw-ss-csv-import-class.php:284
+#: includes/mstw-ss-csv-import-class.php:456
+msgid "Import Sports"
+msgstr ""
+
+#: includes/mstw-ss-csv-import-class.php:254
 msgid "venues"
 msgstr ""
 
-#: includes/mstw-ss-csv-import-class.php:246
+#: includes/mstw-ss-csv-import-class.php:261
 msgid "schedules"
 msgstr ""
 
-#: includes/mstw-ss-csv-import-class.php:260
+#: includes/mstw-ss-csv-import-class.php:275
 msgid "teams"
 msgstr ""
 
-#: includes/mstw-ss-csv-import-class.php:266
+#: includes/mstw-ss-csv-import-class.php:281
 msgid "games"
 msgstr ""
 
-#: includes/mstw-ss-csv-import-class.php:277
+#: includes/mstw-ss-csv-import-class.php:289
+msgid "sports"
+msgstr ""
+
+#: includes/mstw-ss-csv-import-class.php:299
 msgid "Select a CSV file to import. Exiting."
 msgstr ""
 
-#: includes/mstw-ss-csv-import-class.php:361
+#: includes/mstw-ss-csv-import-class.php:386
 #, php-format
 msgid "Skipped %s %s (most likely due to empty title.)"
 msgstr ""
 
-#: includes/mstw-ss-csv-import-class.php:364
+#: includes/mstw-ss-csv-import-class.php:389
 #, php-format
 msgid "Imported %s %s to database in %.2f seconds."
 msgstr ""
 
-#: includes/mstw-ss-csv-import-class.php:467
-#: includes/mstw-ss-csv-import-class.php:468
+#: includes/mstw-ss-csv-import-class.php:518
+#: includes/mstw-ss-csv-import-class.php:519
 msgid "Skipping game entry ... no game schedule ID."
 msgstr ""
 
-#: includes/mstw-ss-csv-import-class.php:474
-#: includes/mstw-ss-csv-import-class.php:475
+#: includes/mstw-ss-csv-import-class.php:525
+#: includes/mstw-ss-csv-import-class.php:526
 msgid "Skipping game entry ... no game slug."
 msgstr ""
 
-#: includes/mstw-ss-csv-import-class.php:489
+#: includes/mstw-ss-csv-import-class.php:540
 msgid "No title imported - "
 msgstr ""
 
-#: includes/mstw-ss-csv-import-class.php:498
+#: includes/mstw-ss-csv-import-class.php:549
 #, php-format
 msgid "Unknown import type \"%s\"."
 msgstr ""

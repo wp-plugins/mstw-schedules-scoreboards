@@ -1,0 +1,7 @@
+game_title,game_slug,game_sched_id,game_time_tba,game_unix_dtg,game_opponent_team,game_gl_location,game_is_home_game,game_opponent,game_opponent_link,game_location,game_location_link,game_our_score,game_opp_score,game_curr_period,game_curr_time,game_is_final,game_result,game_media_label_1,game_media_label_2,game_media_label_3,game_media_url_1,game_media_url_2,game_media_url_3,game_scoreboard
+Chargers-Broncos,chargers-broncos,2014-chargers,,1416564300,-1,-1,0,RBHS Broncos,,RBHS,,,,,,0,,,,,,,,test-scoreboard
+Chargers-Seahawks,chargers-seahawks,2014-chargers,,1414934700,seattle-seahawks,-1,1,,,,,30,21,,,1,,,,,,,,west-coast-football;test-scoreboard;
+Chargers-Chiefs,chargers-chiefs,2014-chargers,,1415538000,kansas-city-chiefs,-1,1,,,,,17,20,4,2:00,0,,Sports Illustrated,SD Union Tribune,Kansas City Star,http://www.si.com,http://utsandiego.com,http://kansascity.com,west-coast-football;test-scoreboard
+Chargers-Raiders,chargers-raiders,2014-chargers,,1416142800,oakland-raiders,-1,1,,,,,,,,,0,,Media One,,,http://calbears.com,,,west-coast-football;
+2014-49ers-09,2014-49ers-08,49ers-2014,,1414933500,st-louis-rams,-1,1,,,,,10,13,,,1,,,,,,,,west-coast-football;
+2014-49ers-10,2014-49ers-10,49ers-2014,,1415527200,new-orleans-saints,-1,0,,,,,24,24,OT,6:34,0,,,,,,,,west-coast-football;

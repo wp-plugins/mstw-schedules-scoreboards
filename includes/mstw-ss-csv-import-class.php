@@ -171,6 +171,21 @@
 						</tr>
 					</table>
 				</form>
+				
+				<!-- SPORTS import form -->
+				<form class="add:the-list: validate" method="post" enctype="multipart/form-data">
+					<!-- Enter the schedule ID via text ... for now -->
+					<table class='form-table'>
+						<thead><tr><th>Sports</th></tr></thead>
+						<tr>  <!-- CSV file selection field -->
+							<td><label for="csv_sports_import"><?php _e( 'Sports CSV file:', 'mstw-schedules-scoreboards' ); ?></label></td>
+							<td><input name="csv_sports_import" id="csv_sports_import" type="file" value="" aria-required="true" /></td>
+						</tr>
+						<tr> <!-- Submit button -->
+						<td colspan="2" class="submit"><input type="submit" class="button" name="submit" value="<?php _e( 'Import Sports', 'mstw-schedules-scoreboards' ); ?>"/></td>
+						</tr>
+					</table>
+				</form>
 			</div><!-- end wrap -->
 			<!-- end of form HTML -->
 		<?php
@@ -266,6 +281,13 @@
 					$msg_str = __( 'games', 'mstw-schedules-scoreboards' );
 					// Check that a file has been uploaded			
 					break;
+				case __( 'Import Sports', 'mstw-schedules-scoreboards' ):
+					//mstw_log_msg( 'In post() method: Importing Schedules ...' );
+					$file_id = 'csv_sports_import';
+					
+					//$msg_str is only used in summary messages
+					$msg_str = __( 'sports', 'mstw-schedules-scoreboards' );
+					break;
 				default:
 					mstw_log_msg( 'Error encountered in post() method. $submit_value = ' . $submit_value . '. Exiting' );
 					return;
@@ -281,7 +303,7 @@
 
 			// Load DataSource.php which does the heavy lifting
 			//echo '<p> ' . __( 'Loading DataSource ...', 'mstw-schedules-scoreboards' ) . '</p>';
-			if ( !class_exists( 'File_CSV_DataSource' ) ) {
+			if ( !class_exists( 'MSTW_CSV_DataSource' ) ) {
 				require_once 'MSTWDataSource.php';
 				//echo '<p> MSTWDataSource loaded .... </p>';
 				//mstw_log_msg( 'MSTWDataSource loaded ....' );
@@ -341,6 +363,9 @@
 							break;
 						case 'csv_schedules_import':
 							$this->create_schedule_fields( $post_id, $csv_data );
+							break;
+						case 'csv_sports_import':
+							$this->create_sport_fields( $post_id, $csv_data );
 							break;
 						default:
 							mstw_log_msg( 'Oops, something went wrong with file ID: ' . $file_id );
@@ -425,6 +450,32 @@
 					
 					// slug should come from CSV file; else will default to sanitize_title()
 					$temp_slug = ( isset( $data['team_slug'] ) && !empty( $data['team_slug'] ) ) ? $data['team_slug'] : sanitize_title( $temp_title );
+					//mstw_log_msg( 'slug: ' . $temp_slug );
+					break;
+				
+				case __( 'Import Sports', 'mstw-schedules-scoreboards' ) :
+					mstw_log_msg( ' We are importing sports ... ' );
+					$type = 'mstw_ss_sport';
+					//this is used to add_action/remove_action below
+					$save_suffix = 'sport_meta';
+					
+					// team title should come from CSV file; else try to create from team name and mascot
+					if ( isset( $data['sport_title'] ) && !empty( $data['sport_title'] ) ) {
+						$temp_title = $data['sport_title'];
+						//mstw_log_msg( 'title: ' . $temp_title );
+					}
+					else { //no team title => try to create from team name and mascot
+						$temp_title = 'No sport title';
+						if ( isset( $data['sport_season'] ) && !empty( $data['sport_season'] ) ) {
+							$temp_title = $data['sport_season'];
+						}
+						if ( isset( $data['sport_gender'] ) && !empty( $data['sport_gender'] ) ) {
+							$temp_title .= ' ' . $data['sport_gender'];
+						}
+					}
+					
+					// slug should come from CSV file; else will default to sanitize_title()
+					$temp_slug = ( isset( $data['sport_slug'] ) && !empty( $data['sport_slug'] ) ) ? $data['sport_slug'] : sanitize_title( $temp_title );
 					//mstw_log_msg( 'slug: ' . $temp_slug );
 					break;
 				
@@ -533,20 +584,35 @@
 						case 'game_slug':
 							//created with the post; nothing else to do here
 							break;
-						// special handling for home game field
+							
+						// BASIC GAME DATA
+						// special handling for checkbox fields
+						case 'game_is_final':
 						case 'game_is_home_game':
 							// have to convert home and empty string to 1 and 0
 							$v = ( empty( $v ) ) ? 0 : 1;
+							// fallthru - intentional
 						case 'game_sched_id':
 						case 'game_time_tba':
 						case 'game_unix_dtg':
+
+						case 'game_opponent_team': //from team DB
+						case 'game_gl_location': //from venues DB - neutral sites
+						
+						//LEGACY STUFF (DEPRECATED)	
 						case 'game_opponent':
-						case 'game_opponent_link':
-						case 'game_opponent_team':	
+						case 'game_opponent_link':						
 						case 'game_location':
 						case 'game_location_link':
-						case 'game_gl_location':
-						case 'game_result':
+						
+						//GAME STATUS STUFF
+						case 'game_our_score':
+						case 'game_opp_score':
+						case 'game_curr_period':
+						case 'game_curr_time':
+						case 'game_result':	
+						
+						//MEDIA STUFF
 						case 'game_media_label_1':
 						case 'game_media_label_2':
 						case 'game_media_label_3':
@@ -555,6 +621,14 @@
 						case 'game_media_url_3':
 							$k = strtolower( $k );
 							$ret = update_post_meta( $post_id, $k, $v );
+							break;
+						case 'game_scoreboard':
+							if( !empty( $v ) ) {
+								mstw_log_msg( 'CSV Game Scoreboard string: ' . $v );
+								$scoreboards = array_filter( str_getcsv( $v, ';', '"' ) );
+								$result = wp_set_object_terms( $post_id, $scoreboards, 'mstw_ss_scoreboard', false );
+								mstw_log_msg( $result );
+							}
 							break;
 						default:
 							// bad column header
@@ -588,6 +662,14 @@
 							$k = strtolower( $k );
 							$ret = update_post_meta( $post_id, $k, $v );
 							break;
+						case 'venue_group':
+							if( !empty( $v ) ) {
+								//mstw_log_msg( 'CSV Venue Group string: ' . $v );
+								$venue_groups = array_filter( str_getcsv( $v, ';', '"' ) );
+								$result = wp_set_object_terms( $post_id, $venue_groups,'mstw_ss_venue_group', false );
+								//mstw_log_msg( $result );
+							}
+							break;
 						default:
 							// bad column header
 							mstw_log_msg( 'Unrecognized venue data field: ' . $k );
@@ -613,6 +695,33 @@
 							//part of creating the post; nothing else needed
 							break; 
 						case 'schedule_team':
+							$k = strtolower( $k );
+							$ret = update_post_meta( $post_id, $k, $v );
+							break;
+						default:
+							// bad column header
+							mstw_log_msg( 'Unrecognized schedule data field: ' . $k );
+							break;
+					}
+				}
+			}
+		} //End of function create_schedule_fields()
+		
+		//-------------------------------------------------------------
+		//	Add the fields from a row of CSV sport data to a newly created post
+		//-------------------------------------------------------------
+		function create_sport_fields( $post_id, $data ) {
+
+			foreach ( $data as $k => $v ) {
+				// anything that doesn't start with csv_ is a custom field
+				if (!preg_match('/^csv_/', $k) && $v != '') {
+					switch ( strtolower( $k ) ) {
+						case 'sport_title':
+						case 'sport_slug':
+							//part of creating the post; nothing else needed
+							break; 
+						case 'sport_season':
+						case 'sport_gender':
 							$k = strtolower( $k );
 							$ret = update_post_meta( $post_id, $k, $v );
 							break;

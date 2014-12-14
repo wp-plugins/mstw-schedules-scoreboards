@@ -367,6 +367,7 @@ function mstw_ss_register_cpts( ) {
 		);
 		
 	register_taxonomy( 'mstw_ss_venue_group', 'mstw_ss_venue', $args );
+	register_taxonomy_for_object_type( 'mstw_ss_venue_group', 'mstw_ss_venue' );
 
 } //End: mstw_ss_register_cpts( )
 ?>

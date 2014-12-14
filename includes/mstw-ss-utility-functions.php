@@ -27,7 +27,7 @@
  * 2. mstw_ss_get_dtg_defaults() - returns default mstw_ss_dtg_options[]
  * 3. mstw_ss_get_color_defaults() - returns default mstw_ss_color_options[]
  * 3.1. mstw_ss_get_sb_defaults - returns the default scoreboard options (mstw_ss_sb_options[])
- * 3.2. mstw_ss_get_venue_defaults - returns the default venue options (mstw_ss_venue_options[])
+ * 3.2. mstw_ss_get_venue_defaults  - returns the default venue options (mstw_ss_venue_options[])
  * 4. mstw_ss_add_css_to_head - build CSS rules from the settings & add to the <head>
  * 5. mstw_ss_build_opponent_entry - builds the opponent entry for front-end elements
  * 5.1 mstw_ss_build_team_entry - builds a team entry for front end elements
