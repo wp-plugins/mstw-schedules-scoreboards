@@ -1,0 +1,5 @@
+
+sport_title,sport_slug,sport_season,sport_gender
+"Men&#8217;s Basketball",mens-basketball,winter,male
+"Women&#8217;s Basketball",womens-basketball,winter,female
+Football,football,fall,male
