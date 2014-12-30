@@ -33,5 +33,19 @@ jQuery(document).ready(function($){
 	$('#ss_sldr_game_location_color').wpColorPicker();
 	$('#ss_sldr_game_time_color').wpColorPicker();
 	$('#ss_sldr_game_links_color').wpColorPicker();
+	
+	$('#sb_header_text_color').wpColorPicker();
+	$('#sb_header_bkgd_color').wpColorPicker();
+	
+	$('#sbg_team_block_text_color').wpColorPicker();
+	$('#sbg_team_block_bkgd_color').wpColorPicker();
+	$('#sbg_date_text_color').wpColorPicker();
+	$('#sbg_winner_bkgd_color').wpColorPicker();
 
+	$('#sbt_game_header_text_color').wpColorPicker();
+	$('#sbt_game_header_bkgd_color').wpColorPicker();
+	$('#sbt_game_block_text_color').wpColorPicker();
+	$('#sbt_game_block_bkgd_color').wpColorPicker();
+	$('$sbt_date_header_color').wpColorPicker();
+	
 });
