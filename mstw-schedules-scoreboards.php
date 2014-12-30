@@ -3,7 +3,7 @@
 Plugin Name: MSTW Schedules & Scoreboards
 Plugin URI: http://wordpress.org/extend/plugins/
 Description: Replaces the MSTW Game Schedules plugin. Includes game schedules and scoreboards.
-Version: 1.1
+Version: 1.2
 Author: Mark O'Donnell
 Author URI: http://shoalsummitsolutions.com
 Text Domain: mstw-schedules-scoreboards
@@ -271,7 +271,11 @@ function mstw_ss_add_caps( $role_obj = null, $role_name = null, $cpt, $cpt_s ) {
 			wp_enqueue_style( 'mstw_ss_style' );			
 		} 
 
+		//javascript for slider next and prev arrows
 		wp_enqueue_script( 'ss-slider', MSTW_SS_JS_URL . '/ss-slider.js', array('jquery'), false, true );
+		
+		//javascript for ticker next and prev arrows
+		wp_enqueue_script( 'ss-ticker', MSTW_SS_JS_URL . '/ss-ticker.js', array('jquery'), false, true );
 		
 	} //end mstw_ss_enqueue_styles( )
 
