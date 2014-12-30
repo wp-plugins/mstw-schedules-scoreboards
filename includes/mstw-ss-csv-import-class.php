@@ -423,7 +423,7 @@
 					}
 					
 					// slug should come from CSV file; else will default to sanitize_title()
-					$temp_slug = ( isset( $data['venue_slug'] ) && !empty( $data['venue_slug'] ) ) ? $data['venue_slug'] : sanitize_title( $temp_title );
+					$temp_slug = ( isset( $data['venue_slug'] ) && !empty( $data['venue_slug'] ) ) ? $data['venue_slug'] : sanitize_title( $temp_title, __( 'No title imported', 'mstw-schedules-scoreboards' ) );;
 					//mstw_log_msg( 'slug: ' . $temp_slug );
 					break;
 					
@@ -449,7 +449,7 @@
 					}
 					
 					// slug should come from CSV file; else will default to sanitize_title()
-					$temp_slug = ( isset( $data['team_slug'] ) && !empty( $data['team_slug'] ) ) ? $data['team_slug'] : sanitize_title( $temp_title );
+					$temp_slug = ( isset( $data['team_slug'] ) && !empty( $data['team_slug'] ) ) ? $data['team_slug'] : sanitize_title( $temp_title, __( 'No title imported', 'mstw-schedules-scoreboards' ) );
 					//mstw_log_msg( 'slug: ' . $temp_slug );
 					break;
 				
@@ -475,7 +475,7 @@
 					}
 					
 					// slug should come from CSV file; else will default to sanitize_title()
-					$temp_slug = ( isset( $data['sport_slug'] ) && !empty( $data['sport_slug'] ) ) ? $data['sport_slug'] : sanitize_title( $temp_title );
+					$temp_slug = ( isset( $data['sport_slug'] ) && !empty( $data['sport_slug'] ) ) ? $data['sport_slug'] : sanitize_title( $temp_title, __( 'No title imported', 'mstw-schedules-scoreboards' ) );
 					//mstw_log_msg( 'slug: ' . $temp_slug );
 					break;
 				
@@ -495,15 +495,8 @@
 						return false;
 					}
 					
-					// must have a slug; else skip
-					if ( isset( $data['schedule_slug'] ) && !empty( $data['schedule_slug'] ) ) {
-						$temp_slug = $data['schedule_slug'];
-						//mstw_log_msg( 'title: ' . $temp_title );
-					}
-					else { //no slug => skip this entry
-						mstw_log_msg( 'Skipping entry ... no schedule slug' );
-						return false;
-					}
+					// slug should come from CSV file; else will default to sanitize_title()
+					$temp_slug = ( isset( $data['schedule_slug'] ) && !empty( $data['schedule_slug'] ) ) ? $data['schedule_slug'] : sanitize_title( $temp_title, __( 'No title imported', 'mstw-schedules-scoreboards' ) );
 					
 					break;
 					
@@ -520,25 +513,33 @@
 						return false;
 					}
 					
-					// Must have a slug; else skip
-					if ( !isset( $data['game_slug'] ) or empty( $data['game_slug'] ) ) {
-						mstw_log_msg( __( 'Skipping game entry ... no game slug.', 'mstw-schedules-scoreboards' ) );
-						$this->log['error'][] = __( 'Skipping game entry ... no game slug.', 'mstw-schedules-scoreboards' );
-						return false;
-					}
-					else {
-						$temp_slug = $data['game_slug'];
-					
-					}
-					
 					// game title should come from CSV file; else create from slug
 					if ( isset( $data['game_title'] ) && !empty( $data['game_title'] ) ) {
 						$temp_title = $data['game_title'];
 						//mstw_log_msg( 'title: ' . $temp_title );
 					}
 					else { //no game title => create from game slug, which we already know exists
-						$temp_title = __( 'No title imported - ', 'mstw-schedules-scoreboards' );
-						$temp_title .= $data['game_slug'];
+						$temp_title = __( 'No title imported', 'mstw-schedules-scoreboards' );
+						//$temp_title .= $data['game_slug'];
+					}
+					
+					// If no game slug is provided, create slug from game title
+					// slug should come from CSV file; else will default to sanitize_title()
+					$temp_slug = ( isset( $data['venue_slug'] ) && !empty( $data['venue_slug'] ) ) ? $data['venue_slug'] : sanitize_title( $temp_title, __( 'No title imported', 'mstw-schedules-scoreboards' ) );
+					
+					if ( !isset( $data['game_slug'] ) or empty( $data['game_slug'] ) ) {
+						// convert title to slug
+						$temp_slug = sanitize_title( $temp_title, __( 'No title imported', 'mstw-schedules-scoreboards' ) );
+					}
+					else {
+						$temp_slug = $data['game_slug'];
+					}
+					
+					//
+					// Added for compatibility ... __DIR__ was not defined until WP 5.3
+					//
+					if ( !defined( '__DIR__' ) ) {
+					   define( '__DIR__', dirname( __FILE__ ) );
 					}
 					
 					break;
@@ -624,11 +625,27 @@
 							break;
 						case 'game_scoreboard':
 							if( !empty( $v ) ) {
-								mstw_log_msg( 'CSV Game Scoreboard string: ' . $v );
+								//mstw_log_msg( 'CSV Game Scoreboard string: ' . $v );
 								$scoreboards = array_filter( str_getcsv( $v, ';', '"' ) );
 								$result = wp_set_object_terms( $post_id, $scoreboards, 'mstw_ss_scoreboard', false );
-								mstw_log_msg( $result );
+								//mstw_log_msg( $result );
 							}
+							break;
+						case 'game_dtg':
+							//mstw_log_msg( 'found a date-time string: ' . $v );
+							$k = 'game_unix_dtg';
+							$v = strtotime( $v );
+							
+							//mstw_log_msg( 'strtotime( $v ) = ' . $v );
+							
+							// Need to convert to a UNIX dtg stamp and store
+							//$v = strtotime( $date_str );
+							//echo '<p>strtotime( ' . $date_str .  ' ) = ' . $v . '</p>';
+							$v = ( $v < 0 or $v === false ) ? current_time( 'timestamp' ) : $v ;
+							//if ( $v <= 0 or $v === false ) { //bad date string
+								//$v = time( );	// default time to now (close enough)
+							//}
+							$ret = update_post_meta( $post_id, $k, $v );
 							break;
 						default:
 							// bad column header

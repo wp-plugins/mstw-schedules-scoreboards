@@ -18,6 +18,12 @@
  *	You should have received a copy of the GNU General Public License
  *	along with this program. If not, see <http://www.gnu.org/licenses/>.
  *----------------------------------------------------------------------*/
+	//
+	// Added for compatibility ... __DIR__ was not defined until WP 5.3
+	//
+	if ( !defined( '__DIR__' ) ) {
+	   define( '__DIR__', dirname( __FILE__ ) );
+	}
 	
 	if ( !defined( 'MSTW_SS_PLUGIN_NAME' ) )
 		define( 'MSTW_SS_PLUGIN_NAME', trim( dirname( plugin_basename( __DIR__ ) ), '/' ) );

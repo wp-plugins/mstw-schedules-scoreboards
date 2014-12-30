@@ -82,7 +82,10 @@ if ( !function_exists( 'mstw_ss_build_scoreboard_gallery' ) ) {
 							}
 							
 							//date header "Sunday, 14 March 2014"
-							$output .= mstw_sbg_date_header( $curr_dtg );
+							if ( !isset( $date_format ) or  empty( $date_format ) ) {
+								$date_format = 'l, j F Y';
+							}
+							$output .= mstw_sbg_date_header( $date_format, $curr_dtg );
 						
 							$output .= "\n<div class=sbg-schedule-day-container> \n";
 							//$output .= "<div class=sbg-games-container> \n";
@@ -130,9 +133,10 @@ if ( !function_exists( 'mstw_ss_build_scoreboard_gallery' ) ) {
 //	Scoreboard date header as an HTML string
 //
 if ( !function_exists( 'mstw_sbg_date_header' ) ) {
-	function mstw_sbg_date_header( $curr_dtg ) {
+	function mstw_sbg_date_header( $date_format, $curr_dtg ) {
 		$ret = "<h4 class=sbg-date-header> \n";
-			$ret .= date( 'l, j F Y', $curr_dtg );
+			$date_format = !empty( $date_format ) ? $date_format : 'l, j F Y' ; 
+			$ret .= date( $date_format, $curr_dtg );
 		$ret .= "</h4> <!-- .sbg-date-header --> \n";
 		return $ret;
 	} //End: mstw_sbg_date_header()
@@ -325,34 +329,35 @@ if ( !function_exists( 'mstw_sbg_home_row' ) ) {
 				}
 				
 				$ret = $div_str;
-					if ( !empty( $home_logo ) ) {
-						$ret .= "<div class=sbg-team-logo> \n";
-						$ret .= "<img src='$home_logo' />";
-						$ret .= "</div> <!-- .sbg-team-logo --> \n";
+				
+				if ( $args['show_logo'] && !empty( $home_logo ) ) {
+					$ret .= "<div class=sbg-team-logo> \n";
+					$ret .= "<img src='$home_logo' />";
+					$ret .= "</div> <!-- .sbg-team-logo --> \n";
+				}
+				if ( $args['show_name'] > 0 ) {
+				//anything but logo only
+					$ret .= "<div class=sbg-team-name> \n";
+					switch ( $args['show_name'] ) {
+						case 1: //full name only
+							$team_name = $home_name;
+							break;
+						case 2: //full mascot only
+							$team_name = $home_mascot;
+							break;
+						case 3: //full name and mascot
+						default:
+							$team_name = $home_name . ' ' . $home_mascot;
+							break;
 					}
-					if ( $args['show_name'] > 0 ) {
-					//anything but logo only
-						$ret .= "<div class=sbg-team-name> \n";
-						switch ( $args['show_name'] ) {
-							case 1: //full name only
-								$team_name = $home_name;
-								break;
-							case 2: //full mascot only
-								$team_name = $home_mascot;
-								break;
-							case 3: //full name and mascot
-							default:
-								$team_name = $home_name . ' ' . $home_mascot;
-								break;
-						}
-						$ret .= "<p class=sbg-team-name>$team_name</p>";
-						$ret .= "</div> <!-- .sbg-team-name --> \n";
-					}
-					if ( !empty( $home_score ) or $home_score == 0 ) {
-						$ret .= "<div class=sbg-team-score> \n";
-						$ret .= "<p class=sbg-team-score>$home_score</p>";
-						$ret .= "</div> <!-- .sbg-team-score --> \n";
-					}
+					$ret .= "<p class=sbg-team-name>$team_name</p>";
+					$ret .= "</div> <!-- .sbg-team-name --> \n";
+				}
+				if ( !empty( $home_score ) or $home_score == 0 ) {
+					$ret .= "<div class=sbg-team-score> \n";
+					$ret .= "<p class=sbg-team-score>$home_score</p>";
+					$ret .= "</div> <!-- .sbg-team-score --> \n";
+				}
 				$ret .= "</div> <!-- .sbg-home --> \n";
 			}
 			else {

@@ -203,44 +203,94 @@ if ( !function_exists( 'mstw_ss_get_sb_defaults' ) ) {
 	function mstw_ss_get_sb_defaults( ) {
 		//resets all the colors to blank
 		return array(
+			//
+			// ALL FORMATS
+			//
+			//THE SCOREBOARD SLUG (sb) MUST BE PROVIDED AS A SHORTCODE ARG
 			'sb'		=> '',
-			//the scoreboard SLUG (sb) MUST be provided as a shortcode arg
 			
-			'games_to_show' 		=> -1,
-			// -1 indicates all games
-			//this is only used for the slider
+			// in version 1.2 ticker|gallery
+			// maybe someday single|slider|table
+			'format' => 'gallery',
 			
-			'format' 		=> 'gallery',
-			// table|gallery|single|slider|ticker
+			// this is the time of the game, not the time remaining
+			'time_format' => 'g:s a', 	//1:30 pm
 			
-			// only applies to slider format, else ignored
-			'sort_order' 		=> 'ASC',
-			//ASC | DESC
-			//default is chronological order
+			//highlight the winner for completed games 0|1
+			//BOLD for the ticker, highlight color for the gallery
+			'highlight_winner'	=> 1,
 			
-			'date_format'	=> 'l, j F Y', 	//Saturday, 7 April 2014
-			'time_format'	=> 'g:s a', 	//1:30 pm
+			//colors always default to '', which means the CSS stylesheet will apply
+			'sb_header_bkgd_color' => '',
+			'sb_header_text_color' => '',
 			
-			'show_name'		=> 3,
+			//
+			// GALLERY FORMAT [ONLY]
+			//
+			'date_format' => 'l, j F Y', 	//Saturday, 7 April 2014
+			
 			//0 - display no team name or mascot(LOGO MUST BE SHOWN)
 			//1 - display (full) team name
 			//2 - display full team mascot (only)
 			//3 - display full team name and (full) mascot
+			'show_name'	=> 3,
 			
-			'show_logo' 	=> 1,
-			//display team logos 0|1
+			//display team logo 0|1
+			'show_logo' => 1,
 			
-			'show_time'		=> 1,
-			//display the game time (remaining) 0|1
+			//team block settings
+			'sbg_team_block_bkgd_color' => '',
+			'sbg_team_block_text_color' => '',
 			
-			'show_period'	=> 1,
-			//display current game period 0|1
-				
-			'show_status'	=> 1,
-			//display the game time status NOT STARTED | IN PROGRESS | FINAL
+			//winner highlight color
+			'sbg_winner_bkgd_color' => '',
 			
-			'highlight_winner'	=> 1,
-			//highlight the winner for completed games
+			//date header text color
+			'sbg_date_text_color' => '',
+			
+			//
+			// TICKER FORMAT [ONLY]
+			//
+			//default forces scoreboard title to be used
+			'sbt_show_header' => 1,
+			'sbt_title' => '', 
+			'sbt_link_label' => '', 
+			'sbt_link_url' => '',
+			'sbt_message' => '',
+			
+			//game block settings
+			'sbt_game_header_bkgd_color' => '',
+			'sbt_game_header_text_color' => '',
+			'sbt_game_block_bkgd_color' => '',
+			'sbt_game_block_text_color' => '',
+			
+			//Scoreboard Name is displayed by default
+			'sbt_title' => '', 
+			
+			//no link will be shown next to scoreboard title
+			'sbt_link_label' => '', 
+			
+			//"link" can have an actual URL or just be a message
+			'sbt_link_url' => '',
+			
+			//message at far right of header
+			'sbt_message' => '',
+			
+			//reset all colors to blank
+			
+			//
+			// RESERVED FOR FUTURE USE
+			//
+			// -1 indicates all games
+			//this is only used for the slider
+			'games_to_show' 		=> -1,
+			
+			//ASC | DESC
+			//default is chronological order
+			'sort_order' 		=> 'ASC',
+			
+			// add link from team name to team URL 0|1
+			'show_team_link' => 0,
 			
 		);
 
@@ -335,8 +385,7 @@ if ( !function_exists( 'mstw_ss_add_css_to_head' ) ) {
 			//echo mstw_build_css_rule( $colors, 'ss_tbl_even_bkgd_color', 'background-color' );
 			echo mstw_build_css_rule( $colors, 'ss_tbl_border_color', 'border-color' );
 		echo "} \n";
-		
-		
+
 		echo "tr.mstw-ss-sw-even, td.mstw-ss-sw-even a, td.mstw-ss-sw-even { \n";
 			echo mstw_build_css_rule( $colors, 'ss_tbl_even_text_color', 'color' );
 			echo mstw_build_css_rule( $colors, 'ss_tbl_even_bkgd_color', 'background-color' );
@@ -374,8 +423,6 @@ if ( !function_exists( 'mstw_ss_add_css_to_head' ) ) {
 			echo mstw_build_css_rule( $colors, 'ss_cdt_countdown_color', 'color' );
 			echo mstw_build_css_rule( $colors, 'ss_cdt_countdown_bkgd_color', 'background-color' );
 		echo "} \n";
-		
-		
 		
 		// SCHEDULE SLIDER
 		echo ".ss-slider .title, .ss-slider .full-schedule-link { \n";
@@ -437,7 +484,64 @@ if ( !function_exists( 'mstw_ss_add_css_to_head' ) ) {
 		echo "#ss-slider-right-arrow, #ss-slider-left-arrow { \n";
 			echo mstw_build_css_rule( $colors, 'ss_sldr_game_location_color', 'color' );
 		echo "} \n";
-
+		
+		//SCOREBOARDS
+		$sb_options = get_option( 'mstw_ss_scoreboard_options' );
+		//mstw_log_msg( $sb_options );
+		
+		//both -----------------------------------------	
+		echo "div.sbt-header, div.sbt-next, div.sbt-prev, div.sbg-game-header { \n";
+			echo mstw_build_css_rule( $sb_options, 'sb_header_bkgd_color', 'background-color' );
+			echo mstw_build_css_rule( $sb_options, 'sb_header_text_color', 'color' );
+		echo "} \n";
+		
+		//gallery----------------------------------------	
+		echo "h4.sbg-date-header, .sbg-date-header { \n";
+			echo mstw_build_css_rule( $sb_options, 'sbg_date_text_color', 'color' );
+		echo "} \n";
+		
+		echo "p.sbg-header-status, p.sbg-header-score { \n";
+			echo mstw_build_css_rule( $sb_options, 'sb_header_text_color', 'color' );
+		echo "} \n";
+		
+		echo "p.sbg-team-name, p.sbg-team-score { \n";
+			echo mstw_build_css_rule( $sb_options, 'sbg_team_block_text_color', 'color' );
+		echo "} \n";
+		
+		echo "div.sbg-team.sbg-winner, .sbg-winner{ \n";
+			echo mstw_build_css_rule( $sb_options, 'sbg_winner_bkgd_color', 'background-color' );
+		echo "} \n";
+		
+		echo "div.sbg-team{ \n";
+			echo mstw_build_css_rule( $sb_options, 'sbg_team_block_bkgd_color', 'background-color' );
+		echo "} \n";
+				
+		//ticker-----------------------------------------		
+		echo "div.sbt-game-header { \n";
+			echo mstw_build_css_rule( $sb_options, 'sbt_game_header_text_color', 'color' );
+			echo mstw_build_css_rule( $sb_options, 'sbt_game_header_bkgd_color', 'background-color' );
+		echo "} \n";
+		
+		echo "div.sbt-link a, div.sbt-link a:active, div.sbt-link a:visited { \n";
+			echo mstw_build_css_rule( $sb_options, 'sb_header_text_color', 'color' );
+		echo "} \n";
+		
+		echo "div.sbt-link a:hover { \n";
+			echo mstw_build_css_rule( $sb_options, 'sb_header_text_color', 'color' );
+		echo "} \n";
+		
+		echo "div.sbt-team { \n";
+			echo mstw_build_css_rule( $sb_options, 'sbt_game_block_bkgd_color', 'background-color' );
+		echo "} \n";
+		
+		echo "div.sbt-ticker-content ul li { \n";
+			echo mstw_build_css_rule( $sb_options, 'sbt_game_block_bkgd_color', 'background-color' );
+		echo "} \n";
+		
+		echo "p.sbt-team-name, p.sbt-team-score { \n";
+			echo mstw_build_css_rule( $sb_options, 'sbt_game_block_text_color', 'color' );
+		echo "} \n";
+		
 		echo '</style>';
 	
 	} //end mstw_ss_add_css_to_head( )

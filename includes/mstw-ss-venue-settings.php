@@ -212,90 +212,15 @@ function mstw_ss_admin_venues_inst( ) {
 	
 } //End: mstw_ss_admin_venues_inst( )
 
-// --------------------------------------------------------------------------------------
-// Render the option page
-/*function mstw_gl_option_page() {
-	?>
-	<div class="wrap">
-		<?php screen_icon(); ?>
-		<h2>Game Locations Plugin Settings</h2>
-		<?php settings_errors( 'mstw_game_locations' ); ?>
-		<form action="options.php" method="post">
-			<?php settings_fields('mstw_gl_options'); ?>
-			<?php do_settings_sections('mstw_gl_settings'); ?>
-			<input name="Submit" type="submit" class="button-primary" value="Save Changes" />
-		</form>
-	</div>
-	<?php
-}
-*/
-// --------------------------------------------------------------------------------------
-	// Register and define the settings
-	/*
-	add_action('admin_init', 'mstw_gl_admin_init');
-	
-	function mstw_gl_admin_init(){
-		register_setting(
-			'mstw_gl_options',
-			'mstw_gl_options',
-			'mstw_gl_validate_options'
-		);
-		
-		mstw_gl_setup_column_settings( );
-	}
-*/
-/*	function mstw_gl_setup_column_settings( ) {
-	
-		//$options = get_option( 'mstw_gl_options' );
-	
-		$display_on_page = 'mstw_gl_settings';
-		$page_section = 'mstw_gl_column_settings';
-		
-		$options = get_option( 'mstw_gl_options', mstw_gl_get_defaults( ) );
-	
-		
-		// MAP ICON WIDTH in venue table
-		$args = array( 	'id' => 'gl_map_width',
-						'name'	=> 'mstw_gl_options[gl_map_width]',
-						'value'	=> $options['gl_map_width'],
-						'label'	=> __( 'Width in pixels (Default: 250)', 'mstw-loc-domain' )
-						);						
-		add_settings_field(
-			'gl_map_width',
-			__( 'Map icon width (in table):', 'mstw-loc-domain' ),
-			'mstw_utl_text_ctrl',
-			$display_on_page,
-			$page_section,
-			$args
-		);
-		
-		// MAP ICON HEIGHT in venue table
-		$args = array( 	'id' => 'gl_map_height',
-						'name'	=> 'mstw_gl_options[gl_map_height]',
-						'value'	=> $options['gl_map_height'],
-						'label'	=> __( 'Height in pixels (Default: 75)', 'mstw-loc-domain' )
-						);						
-		add_settings_field(
-			'gl_map_height',
-			__( 'Map icon height (in table):', 'mstw-loc-domain' ),
-			'mstw_utl_text_ctrl',
-			$display_on_page,
-			$page_section,
-			$args
-		);
-		
-	}
-*/
-
 //-------------------------------------------------------------------------------
 // Validate the user data entries in Venues settings tab
 // 
 function mstw_ss_validate_venues( $input ) {
 	//mstw_log_msg( 'divider' );
-	mstw_log_msg( 'in mstw_ss_validate_venues ...' );
-	mstw_log_msg( '$input[]' );
-	mstw_log_msg( $input );
-	mstw_log_msg( 'divider' );
+	//mstw_log_msg( 'in mstw_ss_validate_venues ...' );
+	//mstw_log_msg( '$input[]' );
+	//mstw_log_msg( $input );
+	//mstw_log_msg( 'divider' );
 	
 	//check if the reset button was pressed and confirmed
 	//array_key_exists() returns true for null, isset does not

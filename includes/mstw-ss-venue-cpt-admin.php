@@ -147,7 +147,7 @@ function mstw_ss_save_venue_meta( $post_id, $post ) {
 		mstw_validate_url( $_POST, 'venue_url', $post_id, 'error', 
 							  __( 'Invalid venue URL:', 'mstw-schedules-scoreboards' ) );
 
-		mstw_ss_add_admin_notice( 'updated', __( 'Venue saved.', 'mstw-schedules-scoreboards') );							  
+		//mstw_ss_add_admin_notice( 'updated', __( 'Venue saved.', 'mstw-schedules-scoreboards') );							  
 		
 	} //End: verify nonce/context (valid nonce)
 	

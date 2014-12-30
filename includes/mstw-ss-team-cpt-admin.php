@@ -207,7 +207,7 @@ function mstw_ss_create_teams_ui( $post ) {
 								'label' => __( 'Slider Logo:', 'mstw-schedules-scoreboards' ),
 								'maxlength' => 256,
 								'size' => $std_size,
-								'desc' => __( 'Enter the full path to any file, or click the button to access the media library. Recommended size 41x28px.', 'mstw-schedules-scoreboards' ),
+								'desc' => __( 'Enter the full path to any file, or click the button to access the media library. Recommended size 125x125px.', 'mstw-schedules-scoreboards' ),
 								'btn_label' => __( 'Upload from Media Library', 'mstw-schedules-scoreboards' ),
 								'img_width' => 80,
 								),
@@ -304,7 +304,7 @@ function mstw_ss_save_team_meta( $post_id, $post ) {
 		mstw_validate_url( $_POST, 'team_alt_logo', $post_id, 'warning', 
 							  __( 'Invalid team slider logo:', 'mstw-schedules-scoreboards' ) );
 							  
-		mstw_ss_add_admin_notice( 'updated', __( 'Team saved.', 'mstw-schedules-scoreboards') );
+		//mstw_ss_add_admin_notice( 'updated', __( 'Team saved.', 'mstw-schedules-scoreboards') );
 	}
 	else {
 		if ( strpos( wp_get_referer( ), 'trash' ) === FALSE ) {

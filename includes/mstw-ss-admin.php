@@ -35,6 +35,7 @@ if ( is_admin( ) ) {
 	include_once 'mstw-ss-color-settings.php';
 	include_once 'mstw-ss-dtg-settings.php';
 	include_once 'mstw-ss-venue-settings.php';
+	include_once 'mstw-ss-scoreboard-settings.php';
 	include_once 'mstw-ss-schedule-cpt-admin.php';
 	include_once 'mstw-ss-team-cpt-admin.php';
 	include_once 'mstw-ss-game-cpt-admin.php';
@@ -122,10 +123,8 @@ function mstw_ss_post_row_actions( $actions, $post ) {
 	
 	$post_type = mstw_get_current_post_type( );
 	
-	//if ( $post->post_type == 'mstw_ss_schedule' ) {
 	if ( $post_type == 'mstw_ss_schedule' or 
 		 $post_type == 'mstw_ss_team' or 
-		 //$post_type == 'mstw_ss_game' or 
 		 $post_type == 'mstw_ss_schedule' or  
 		 $post_type == 'mstw_ss_venue' ) {
 		 
@@ -133,6 +132,10 @@ function mstw_ss_post_row_actions( $actions, $post ) {
 		unset( $actions['view'] );
 		
 	} 
+	else if ( $post_type == 'mstw_ss_game' ) {
+		// we have a single game view
+		unset( $actions['inline hide-if-no-js'] );
+	}
 	
 	return $actions;
 	
@@ -459,19 +462,6 @@ function mstw_ss_admin_menu( ) {
 								'mstw_ss_import_csv_page',
 								array( $plugin, 'form' )	// Callback to output content						
 						); 
-						
-		//$capability = apply_filters( 'mstw_ss_user_capability', 'edit_others_posts', 'csv_import_menu_item' );
-		/*
-		$capability = 'edit_others_posts';
-		
-		add_submenu_page(	'edit.php?post_type=scheduled_games',
-							__('Import Schedule from CSV File', 'mstw-schedules-scoreboards' ),	//page title
-							__( 'CSV Schedule Import',	'mstw-schedules-scoreboards' ),			//menu title
-							'read', //$capability,				//capability to access
-							'mstw-ss-csv-import',				//slug name for menu
-							null //array( $plugin, 'form' )		//callback to display menu
-						);
-		*/
 					
 	} //End: if( current_user_can( )
 
@@ -508,6 +498,9 @@ function mstw_ss_admin_init( ) {
 	// Venue settings
 	mstw_ss_venue_setup( );
 	
+	// Scoreboard settings
+	mstw_ss_scoreboard_setup( );
+	
 	register_setting(
 		'mstw_ss_options',  		// settings group name
 		'mstw_ss_options',  		// options (array) to validate
@@ -531,6 +524,12 @@ function mstw_ss_admin_init( ) {
 		'mstw_ss_venue_options', 	// options (array) to validate
 		'mstw_ss_validate_venues'   // validation function
 		);
+		
+	register_setting(
+		'mstw_ss_scoreboard_options',  	// settings group name
+		'mstw_ss_scoreboard_options', 	// options (array) to validate
+		'mstw_ss_validate_scoreboards'   // validation function
+		);	
 		
 } //End: mstw_ss_admin_init()
 

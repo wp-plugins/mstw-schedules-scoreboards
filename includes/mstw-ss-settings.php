@@ -67,6 +67,11 @@ function mstw_ss_settings_page( ) {
 					do_settings_sections( 'mstw-ss-venue-settings' );
 					$options_name = 'mstw_ss_venue_options[reset]';
 					break;
+				case 'scoreboards-tab':
+					settings_fields( 'mstw_ss_scoreboard_options' );
+					do_settings_sections( 'mstw-ss-scoreboard-settings' );
+					$options_name = 'mstw_ss_scoreboard_options[reset]';
+					break;
 			}
 			?>
 			<table class="form-table">
@@ -99,6 +104,8 @@ function mstw_ss_admin_tabs( $current_tab = 'fields-columns-tab' ) {
 					'date-time-tab' => __( 'Date/Time Formats', 'mstw-schedules-scoreboards' ),
 					'colors-tab' => __( 'Colors', 'mstw-schedules-scoreboards' ),
 					'venues-tab' => __( 'Venues Settings', 'mstw-schedules-scoreboards' ),
+					'scoreboards-tab' => __( 'Scoreboards Settings', 'mstw-schedules-scoreboards' ),
+					
 					);
 	//echo '<div id="icon-themes" class="icon32"><br></div>';
 	echo '<h2 class="nav-tab-wrapper">';
@@ -401,10 +408,10 @@ function mstw_ss_data_fields_setup( ) {
 							// the default value for this setting
 							'default' => '',
 							// only used for select-option and ..
-							'options' => array( 'Hide' => 0,
-												'Show 1' => 1,
-												'Show 2' => 2,
-												'Show 3' => 3,
+							'options' => array( __( 'Hide', 'mstw-schedules-scoreboards' ) => 0,
+												__( 'Show 1', 'mstw-schedules-scoreboards' ) => 1,
+												__( 'Show 2', 'mstw-schedules-scoreboards' ) => 2,
+												__( 'Show 3', 'mstw-schedules-scoreboards' ) => 3,
 												),
 							// name of HTML form element
 							'name'	=> 'mstw_ss_options[show_media]',

@@ -29,20 +29,19 @@ add_shortcode( 'mstw_scoreboard', 'mstw_ss_scoreboard_shortcode_handler' );
 
 function mstw_ss_scoreboard_shortcode_handler( $atts ){
 	// get the options set in the admin display settings screen
-	// NONE YET
-	// $base_options = get_option( 'mstw_ss_options' );
-	
-	$output = '';
-	
+	$options = get_option( 'mstw_ss_scoreboard_options' );
+
 	// and merge them with the defaults
 	$defaults = mstw_ss_get_sb_defaults( );
 	
-	//$args = wp_parse_args( $options, $defaults );
+	$args = wp_parse_args( $options, $defaults );
 	//$output .= '<pre>ARGS:' . print_r( $args, true ) . '</pre>';
 	//return $output;
 		
-	//merge the shortcode args with the defaults								
-	$attribs = shortcode_atts( $defaults, $atts );
+	//merge the shortcode args with the result
+	$attribs = shortcode_atts( $args, $atts );
+		
+	$output = '';
 	
 	if( !isset( $attribs['sb'] ) or empty( $attribs['sb'] ) ) {
 		$output = "<h3 class='mstw-sb-msg'>No scoreboard ID provided to [mstw_scoreboard].</h3>";
@@ -51,6 +50,7 @@ function mstw_ss_scoreboard_shortcode_handler( $atts ){
 	
 	//mstw_log_msg( 'in mstw_ss_scoreboard_shortcode_handler()' );
 	//mstw_log_msg( $attribs );
+	//mstw_log_msg( 'in mstw_ss_scoreboard_shortcode_handler() ... format= ' . $attribs['format'] );
 	
 	switch ( $attribs['format'] ) {
 		case 'table':
@@ -63,6 +63,9 @@ function mstw_ss_scoreboard_shortcode_handler( $atts ){
 			break;
 		case 'slider':
 		case 'ticker':
+			include_once( MSTW_SS_INCLUDES_DIR . '/mstw-ss-scoreboard-ticker.php' );
+			$output = mstw_ss_build_scoreboard_ticker( $attribs );
+			break;
 		default:
 			$output = "<h3 class='mstw-sb-msg'>[mstw_scoreboard] shortcode ... unrecognized format: {$attribs['format']}</h3";
 			break;
@@ -90,7 +93,7 @@ if ( !function_exists( 'mstw_ss_build_scoreboard_table' ) ) {
 
 		$output = ''; //This is the return string
 		
-		mstw_log_msg( 'in mstw_ss_build_scoreboard_table() format: ' . $args['format'] );
+		//mstw_log_msg( 'in mstw_ss_build_scoreboard_table() format: ' . $args['format'] );
 		$output .= "<h3 class='mstw-sb-msg'>" . __( 'The scoreboard table format is not available at the time.', 'mstw-schedules-scoreboards' ) . "</h3>";
 		
 		/*

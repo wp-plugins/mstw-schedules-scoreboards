@@ -629,7 +629,7 @@ function mstw_ss_save_game_meta( $post_id, $post ) {
 		mstw_validate_url( $_POST, 'game_media_url_3', $post_id, 'warning', 
 							  __( 'Invalid URL. Media URL 3 not saved.', 'mstw-schedules-scoreboards' ) );
 							  
-		mstw_ss_add_admin_notice( 'updated', __( 'Game saved.', 'mstw-schedules-scoreboards') );
+		//mstw_ss_add_admin_notice( 'updated', __( 'Game saved.', 'mstw-schedules-scoreboards') );
 	}
 	else {	
 		if ( strpos( wp_get_referer( ), 'trash' ) === FALSE ) {

@@ -533,6 +533,9 @@ if( !function_exists( 'mstw_build_settings_field' ) ) {
 		// "extract" to be able to use the array keys as variables in our function output below
 		extract( wp_parse_args( $args, $defaults ) );
 		
+		//mstw_log_msg( 'in build_settings_field ... $args= ' );
+		//mstw_log_msg( wp_parse_args( $args, $defaults ) );
+		
 		//Handle some MSTW custom field types; convert for generic select-option
 		switch ( $type ) {
 			case 'show-hide':
@@ -543,6 +546,7 @@ if( !function_exists( 'mstw_build_settings_field' ) ) {
 				break;
 			case 'date-time':
 				$type = 'select-option';
+				
 				$options = array ( 	__( 'Custom', 'mstw-loc-domain' ) => 'custom',
 									__( 'Tuesday, 07 April 01:15 pm', 'mstw-loc-domain' ) => 'l, d M h:i a',
 									__( 'Tuesday, 7 April 01:15 pm', 'mstw-loc-domain' ) => 'l, j M h:i a',
@@ -555,9 +559,16 @@ if( !function_exists( 'mstw_build_settings_field' ) ) {
 									__( '07 April 01:15 pm', 'mstw-loc-domain' ) => 'd M g:i a',
 									__( '7 April 01:15 pm', 'mstw-loc-domain' ) => 'j M g:i a',		
 									);
+				
+				if ( isset( $custom_format ) && $custom_format == 0 ) {
+					//remove the custom option
+					unset( $options[ __( 'Custom', 'mstw_loc_domain' ) ] );
+				}
+				
 				if ( $desc == '' ) {
 					$desc = __( 'Formats for 7 April 2013 13:15.', 'mstw-loc-domain' );
 				}
+				
 				break;
 			case 'date-only':
 				$type = 'select-option';
@@ -578,6 +589,11 @@ if( !function_exists( 'mstw_build_settings_field' ) ) {
 									__( '07 Apr', 'mstw-loc-domain' ) => 'd M',
 									__( '7 Apr', 'mstw-loc-domain' ) => 'j M',
 									);
+									
+				if ( isset( $custom_format ) && $custom_format == 0 ) {
+					//remove the custom option
+					unset( $options[ __( 'Custom', 'mstw_loc_domain' ) ] );
+				}
 				if ( $desc == '' ) {
 					$desc = __( 'Formats for 7 Apr 2013. Default: 2013-04-07', 'mstw-loc-domain' );
 				}
@@ -592,6 +608,11 @@ if( !function_exists( 'mstw_build_settings_field' ) ) {
 									__( '8:00 am', 'mstw-loc-domain' ) 		=> 'g:i a',
 									__( '8:00 AM', 'mstw-loc-domain' ) 		=> 'g:i A',
 									);
+									
+				if ( isset( $custom_format ) && $custom_format == 0 ) {
+					//remove the custom option
+					unset( $options[ __( 'Custom', 'mstw_loc_domain' ) ] );
+				}
 				if ( $desc == '' ) {
 					$desc = __( 'Formats for eight in the morning. Default: 08:00', 'mstw-loc-domain' );
 				}
