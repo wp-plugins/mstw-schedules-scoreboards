@@ -575,14 +575,14 @@ div.sbg-schedule-day-container {
 	width: 700px;
 }
 
+h4.sbg-date-header, .sbg-date-header {
+	color: #000;
+	font-weight: bold;
+}
 
 /* GAME HEADER */
 div.sbg-game-header {
-	/*
-	 * background is now set with the wp_header hook so the directory is not hard-wired
-	 * background: #3F3F3F url(http://new.dev/wp-content/plugins/mstw-schedules-scoreboards/images/sbg-header-bkgd.jpg) top left no-repeat;
-	 */
-	background: #3F3F3F url( ../images/sbg-header-bkgd.jpg ) top left no-repeat;
+	background: #3F3F3F url( ../images/sbg-header-bkgd.png ) top left no-repeat;
 	padding: 2px 6px;
 	border-bottom: 1px solid #DFDFDF;
 	height: 1%;
@@ -601,6 +601,7 @@ p.sbg-header-status, p.sbg-header-score {
 	line-height: 15px;
 	font-weight: normal;
 	color: #fff;
+	font-weight: bold;
 }
 
 div.sbg-header-score {
@@ -613,11 +614,8 @@ div.sbg-team {
 	clear: both;
 	padding: 6px 6px 6px 0;
 	border-bottom: 1px solid #DFDFDF;
-	/*
-	 * background is now set with the wp_header hook so the directory is not hard-wired
-	 * background: #FEFEFE url(http://new.dev/wp-content/plugins/mstw-schedules-scoreboards/images/sbg-game-block-bkgd.jpg) top left repeat-x;
-	 */
-	background: #FEFEFE url(../images/sbg-game-block-bkgd.jpg) top left repeat-x;
+	/*background: #FEFEFE url(../images/sbg-game-block-bkgd.jpg) top left repeat-x;*/
+	background: #FEFEFE;
 	height: 1%;
 	position: relative;
 }
@@ -663,6 +661,156 @@ width: 300px;
 		clear: left;
 	}
 }
+
+/******************************************************/
+/* Styles for the Scoreboard Ticker  */
+/******************************************************/
+div.sbt-schedule-container {
+	width: 541px; /*8 games displayed (8*62 + 35)*/
+	height: 100px;
+	border: none;
+}
+div.sbt-header {
+	width: 100%;
+	font-weight: bold;
+	font-size: 11px;
+	background: #3F3F3F url(../images/sbt-header-bkgd.png ) top left no-repeat;
+	height: 19px;
+	color: #FFF;
+}
+div.sbt-title, div.sbt-link, div.sbt-message {
+	padding: 2px 10px;
+	font-weight: bold;
+}
+
+div.sbt-title {
+	float: left;
+	margin-right: 10px;
+}
+
+div.sbt-link {
+	float: left;
+}
+
+div.sbt-link a, div.sbt-link a:active, div.sbt-link a:visited {
+	color: white;
+	text-decoration: underline;
+}
+
+div.sbt-link a:hover {
+	text-decoration: none;
+}
+
+div.sbt-message {
+	float: right;
+}
+
+div.sbt-ticker-holder {
+	clear: both;
+	position:relative;
+	width: 100%;
+	padding: 0 1px 1px;
+	/*background: #818387;*/
+	/*height: 39px;*/
+	margin-top: 1px;
+	/*border: green 1px solid;*/
+}
+
+div.sbt-prev {
+	background: url("../images/prev.png") no-repeat scroll 0px 0px rgba(0, 0, 0, 0);
+	cursor: pointer;
+	height: 42px;
+	width: 20px;
+	left: 1px;
+	position: absolute;
+	top: 4px;
+}
+
+div.sbt-next {
+	background: url("../images/next.png") no-repeat scroll 0px 0px rgba(0, 0, 0, 0);
+	cursor: pointer;
+	height: 42px;
+	width: 20px;
+	position: absolute;
+	right: 1px;
+	top: 4px;
+	/*margin-left: 5px;*/
+}
+
+div.sbt-ticker-content {
+	/*background: none repeat scroll 0 0 rgba(0, 0, 0, 0);*/
+	/*border: #00f solid 2px;*/
+	/*height: 35px;*/
+	
+	margin: 1px 0 0;
+	overflow: hidden;
+	padding: 1px 0px;
+	top: 0;
+	position: absolute;
+	left: 25px;
+	width: 496px; /*display 8 games by default 8*62 */
+}
+
+div.sbt-ticker-content ul {
+	margin: 0;
+	width: 3100px; /*allows for up to 50 games per ticker*/
+}
+
+div.sbt-ticker-content ul li {
+	width: auto;
+	font-size: 10px;
+	list-style: none;
+	float: left;
+	margin: 2px 5px 2px 0;
+	background: #bbb;
+}
+
+div.sbt-team.sbt-winner {
+	font-weight: 800;
+	color: #000;
+}
+
+div.sbt-game-header {
+	float: left;
+	background: #818181;
+	color: #000;
+	width: 57px;
+}
+
+p.sbt-header-status {
+	float:left;
+	margin: 0;
+	padding: 2px;
+	line-height: 10px;
+	font-weight: 800;
+}
+
+div.sbt-team {
+	clear: both;
+	color: #333;
+	font-weight: bold;
+}
+
+p.sbt-team-name {
+	float:left;
+	margin: 0;
+	padding: 2px;
+	line-height: 10px;
+}
+
+p.sbt-team-score {
+	float:right;
+	margin: 0;
+	padding: 2px;
+	line-height: 10px;
+}
+
+.sbt-ticker-content ul {
+	position: relative;
+	left: 0;
+	top: 0;
+}
+
 
 /******************************************************
  * Styles for the Game Venues Shortcode  
