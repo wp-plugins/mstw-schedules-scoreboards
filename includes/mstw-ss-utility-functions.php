@@ -253,30 +253,16 @@ if ( !function_exists( 'mstw_ss_get_sb_defaults' ) ) {
 			//
 			//default forces scoreboard title to be used
 			'sbt_show_header' => 1,
-			'sbt_title' => '', 
-			'sbt_link_label' => '', 
-			'sbt_link_url' => '',
-			'sbt_message' => '',
+			'sbt_title' => '', 		//Scoreboard Name is displayed by default
+			'sbt_link_label' => '', //no link will be shown next to scoreboard title
+			'sbt_link_url' => '',	//"link" can have an actual URL or just be a message
+			'sbt_message' => '',	//message at far right of header
 			
 			//game block settings
 			'sbt_game_header_bkgd_color' => '',
 			'sbt_game_header_text_color' => '',
 			'sbt_game_block_bkgd_color' => '',
 			'sbt_game_block_text_color' => '',
-			
-			//Scoreboard Name is displayed by default
-			'sbt_title' => '', 
-			
-			//no link will be shown next to scoreboard title
-			'sbt_link_label' => '', 
-			
-			//"link" can have an actual URL or just be a message
-			'sbt_link_url' => '',
-			
-			//message at far right of header
-			'sbt_message' => '',
-			
-			//reset all colors to blank
 			
 			//
 			// RESERVED FOR FUTURE USE
