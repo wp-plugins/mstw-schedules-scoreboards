@@ -41,7 +41,7 @@ function mstw_ss_table_colors_section_setup( ) {
 	
 	add_settings_section(
 		$page_section,
-		'Schedule Table Colors',
+		__( 'Schedule Table Colors', 'mstw-schedules-scoreboards' ),
 		'mstw_ss_colors_table_inst',
 		$display_on_page
 		);
@@ -150,7 +150,7 @@ function mstw_ss_cdt_colors_section_setup( ) {
 	
 	add_settings_section(
 		$page_section,
-		'Countdown Timer Colors',
+		__( 'Countdown Timer Colors', 'mstw-schedules-scoreboards' ),
 		'mstw_ss_colors_cdt_inst',
 		$display_on_page
 	);
@@ -252,7 +252,7 @@ function mstw_ss_slider_colors_section_setup( ) {
 	
 	add_settings_section(
 		$page_section,
-		'Schedule Slider Colors',
+		__( 'Schedule Slider Colors', 'mstw-schedules-scoreboards' ),
 		'mstw_ss_colors_slider_inst',
 		$display_on_page
 		);	

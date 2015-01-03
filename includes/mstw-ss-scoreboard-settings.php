@@ -44,7 +44,7 @@ function mstw_ss_general_section_setup( ) {
 	
 	add_settings_section(
 		$page_section,
-		'Scoreboard General Settings',
+		__( 'Scoreboard General Settings', 'mstw-schedules-scoreboards' ),
 		'mstw_ss_general_inst',
 		$display_on_page
 		);
@@ -113,7 +113,7 @@ function mstw_ss_gallery_section_setup( ) {
 	
 	add_settings_section(
 		$page_section,
-		'Gallery Settings',
+		__( 'Gallery Settings', 'mstw-schedules-scoreboards' ),
 		'mstw_ss_gallery_inst',
 		$display_on_page
 	);
@@ -226,7 +226,7 @@ function mstw_ss_ticker_section_setup( ) {
 	
 	add_settings_section(
 		$page_section,
-		'Scoreboard Ticker Settings',
+		__( 'Scoreboard Ticker Settings', 'mstw-schedules-scoreboards' ),
 		'mstw_ss_ticker_inst',
 		$display_on_page
 		);	

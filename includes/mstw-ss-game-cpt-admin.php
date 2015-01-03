@@ -29,7 +29,7 @@ add_action( 'add_meta_boxes_mstw_ss_game', 'mstw_ss_game_metaboxes' );
 
 function mstw_ss_game_metaboxes( ) {
 		
-	add_meta_box('mstw-ss-game-meta', 'Game Data', 'mstw_ss_create_games_ui', 
+	add_meta_box('mstw-ss-game-meta', __( 'Game Data', 'mstw-schedules-scoreboards' ), 'mstw_ss_create_games_ui', 
 					'mstw_ss_game', 'normal', 'high', null );
 					
 } //End: mstw_ss_game_metaboxes( )
@@ -196,7 +196,7 @@ function mstw_ss_create_games_ui( $post ) {
 				}
 				?>
 			</select>
-			&nbsp;or&nbsp;
+			&nbsp;<?php echo __( 'or', 'mstw-schedules-scoreboards' ) ?>&nbsp;
 			<select id='game_time_tba' name='game_time_tba'>
 				<?php 
 				foreach( $game_time_tba_arr as $key=>$value ) {

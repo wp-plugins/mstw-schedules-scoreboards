@@ -108,7 +108,7 @@
 				<form class="add:the-list: validate" method="post" enctype="multipart/form-data" action="">
 					<!-- Enter the schedule ID via text ... for now -->
 					<table class='form-table'>
-						<thead><tr><th>Venues (formerly Locations)</th></tr></thead>
+						<thead><tr><th><?php echo __( 'Venues (formerly Locations)', 'mstw-schedules-scoreboards' ) ?></th></tr></thead>
 						
 						<tr>  <!-- CSV file selection field -->
 							<td><label for="csv_venues_import"><?php _e( 'Venues/Locations CSV file:', 'mstw-schedules-scoreboards' ); ?></label></td>
@@ -124,7 +124,7 @@
 				<form class="add:the-list: validate" method="post" enctype="multipart/form-data" action="">
 					<!-- Enter the schedule ID via text ... for now -->
 					<table class='form-table'>
-						<thead><tr><th>Schedules</th></tr></thead>
+						<thead><tr><th><?php echo __( 'Schedules', 'mstw-schedules-scoreboards' ) ?></th></tr></thead>
 						
 						<tr>  <!-- CSV file selection field -->
 							<td><label for="csv_schedules_import"><?php _e( 'Schedules CSV file:', 'mstw-schedules-scoreboards' ); ?></label></td>
@@ -139,7 +139,7 @@
 				<!-- TEAMS import form -->
 				<form class="add:the-list: validate" method="post" enctype="multipart/form-data" action="">
 					<table class='form-table'>
-						<thead><tr><th>Teams</th></tr></thead>
+						<thead><tr><th><?php echo __( 'Teams', 'mstw-schedules-scoreboards' ) ?></th></tr></thead>
 						
 						<tr>  <!-- CSV file selection field -->
 							<td><label for="csv_teams_import"><?php _e( 'Teams CSV file:', 'mstw-schedules-scoreboards' ); ?></label></td>
@@ -149,7 +149,7 @@
 							<td><label for="csv_image_directory"><?php _e( 'Image Directory(URL):', 'mstw-schedules-scoreboards' ); ?></label></td>
 							<td><input name="csv_image_directory" id="csv_image_directory" type="text" value="" aria-required="true" />
 							<br/>
-							<span class='description'><?php printf( 'Enter the FULL URL for the images directory. If blank, logos will be imported as is. If set, the basename of the logo URLs will be replaced with this entry. DO NOT INCLUDE A TRAILING SLASH. For example, if "%s" is entered, then "%s" in the CSV file will be converted to "%s".', "<span style='font-style: normal'>http://newsite.com/newimagedirectory</span>", "<span style='font-style: normal'>http://oldsite.com/oldimagedirectory/logofile.png</span>", "<span style='font-style: normal'>http://newsite.com/newimagedirectory/logofile.png</span>" ) ?></span></td>
+							<span class='description'><?php printf( __( 'Enter the FULL URL for the images directory. If blank, logos will be imported as is. If set, the basename of the logo URLs will be replaced with this entry. DO NOT INCLUDE A TRAILING SLASH. For example, if "%s" is entered, then "%s" in the CSV file will be converted to "%s".', 'mstw-schedules-scoreboards' ), "<span style='font-style: normal'>http://newsite.com/newimagedirectory</span>", "<span style='font-style: normal'>http://oldsite.com/oldimagedirectory/logofile.png</span>", "<span style='font-style: normal'>http://newsite.com/newimagedirectory/logofile.png</span>" ) ?></span></td>
 						</tr>
 						<tr> <!-- Submit button -->
 						<td colspan="2" class="submit"><input type="submit" class="button" name="submit" value="<?php _e( 'Import Teams', 'mstw-schedules-scoreboards' ); ?>"/></td>
@@ -161,7 +161,7 @@
 				<form class="add:the-list: validate" method="post" enctype="multipart/form-data">
 					<!-- Enter the schedule ID via text ... for now -->
 					<table class='form-table'>
-						<thead><tr><th>Games</th></tr></thead>
+						<thead><tr><th><?php echo __( 'Games', 'mstw-schedules-scoreboards' ) ?></th></tr></thead>
 						<tr>  <!-- CSV file selection field -->
 							<td><label for="csv_games_import"><?php _e( 'Games CSV file:', 'mstw-schedules-scoreboards' ); ?></label></td>
 							<td><input name="csv_games_import" id="csv_games_import" type="file" value="" aria-required="true" /></td>
@@ -176,7 +176,7 @@
 				<form class="add:the-list: validate" method="post" enctype="multipart/form-data">
 					<!-- Enter the schedule ID via text ... for now -->
 					<table class='form-table'>
-						<thead><tr><th>Sports</th></tr></thead>
+						<thead><tr><th><?php echo __( 'Sports', 'mstw-schedules-scoreboards' ) ?></th></tr></thead>
 						<tr>  <!-- CSV file selection field -->
 							<td><label for="csv_sports_import"><?php _e( 'Sports CSV file:', 'mstw-schedules-scoreboards' ); ?></label></td>
 							<td><input name="csv_sports_import" id="csv_sports_import" type="file" value="" aria-required="true" /></td>

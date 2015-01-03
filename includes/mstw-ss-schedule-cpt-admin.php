@@ -28,7 +28,7 @@
 add_action( 'add_meta_boxes_mstw_ss_schedule', 'mstw_ss_schedule_metaboxes' );
 
 function mstw_ss_schedule_metaboxes( ) {		
-	add_meta_box('mstw-ss-schedule-meta', 'Schedule Data', 'mstw_ss_create_schedules_ui', 
+	add_meta_box('mstw-ss-schedule-meta', __( 'Schedule Data', 'mstw-schedules-scoreboards' ), 'mstw_ss_create_schedules_ui', 
 					'mstw_ss_schedule', 'normal', 'high', null );		
 	//remove_meta_box( 'slugdiv', 'mstw_ss_schedule', 'normal' );
 }

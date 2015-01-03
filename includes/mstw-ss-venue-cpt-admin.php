@@ -28,7 +28,7 @@
 add_action( 'add_meta_boxes_mstw_ss_venue', 'mstw_ss_venue_metaboxes' );
 
 function mstw_ss_venue_metaboxes( ) {		
-	add_meta_box('mstw-ss-venue-meta', 'Venue Data', 'mstw_ss_create_venues_ui', 
+	add_meta_box('mstw-ss-venue-meta',  __( 'Venue Data', 'mstw-schedules-scoreboards' ), 'mstw_ss_create_venues_ui', 
 					'mstw_ss_venue', 'normal', 'high', null );		
 	remove_meta_box( 'slugdiv', 'mstw_ss_venue', 'normal' );
 }

@@ -29,7 +29,7 @@ function mstw_ss_settings_page( ) {
 	?>
 	<div class="wrap">
 		<?php screen_icon(); ?>
-		<h2>Schedules & Scoreboards Plugin Settings</h2>
+		<h2><?php echo __( 'Schedules & Scoreboards Plugin Settings', 'mstw-schedules-scoreboards') ?></h2>
 		<?php //settings_errors(); ?> 
 		
 		<?php 

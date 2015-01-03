@@ -28,7 +28,7 @@
 add_action( 'add_meta_boxes_mstw_ss_team', 'mstw_ss_team_metaboxes' );
 
 function mstw_ss_team_metaboxes( ) {		
-	add_meta_box('mstw-ss-team-meta', 'Team Data', 'mstw_ss_create_teams_ui', 
+	add_meta_box('mstw-ss-team-meta',  __( 'Team Data', 'mstw-schedules-scoreboards' ), 'mstw_ss_create_teams_ui', 
 					'mstw_ss_team', 'normal', 'high', null );			
 	remove_meta_box( 'slugdiv', 'mstw_ss_team', 'normal' );
 }

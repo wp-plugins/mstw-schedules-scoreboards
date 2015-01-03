@@ -30,7 +30,7 @@ add_action( 'add_meta_boxes_mstw_ss_sport', 'mstw_ss_sport_metaboxes' );
 
 function mstw_ss_sport_metaboxes( ) {
 		
-	add_meta_box('mstw-ss-sport-meta', 'Sport Data', 'mstw_ss_create_sports_ui', 
+	add_meta_box('mstw-ss-sport-meta',  __( 'Sport Data', 'mstw-schedules-scoreboards' ), 'mstw_ss_create_sports_ui', 
 					'mstw_ss_sport', 'normal', 'high', null );
 					
 } //End: mstw_ss_sport_metaboxes( )
