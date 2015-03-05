@@ -56,6 +56,11 @@ The current version of MSTW Schedules & Scoreboards has been tested on WP 4.1 wi
 
 == Changelog ==
 
+= 1.3 =
+* Corrected bug that affected schedule sliders with only one game displayed on them.
+* Corrected bug with CSS loads. 
+* Updated CSS stylesheet loading as described on this manual page.
+
 = 1.2 =
 * Added a scoreboard 'ticker' shortcode - a slider of games & scores intended for the top of pages. 
 * Added a Scoreboard Settings tab to the plugin's Settings admin screen. 
