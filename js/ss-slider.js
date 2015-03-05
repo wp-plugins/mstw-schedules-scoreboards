@@ -10,11 +10,10 @@ jQuery(function($) {
 	
 	var view_width = $('.ss-slider-area').outerWidth();
 	var nbr_blocks = Math.floor( view_width/block_width );
-	var slide_distance = (nbr_blocks-1)*block_width;
+
 	//10 to acccount for extra width of slider
 	var right_stop = -slider_width + nbr_blocks*block_width+10; 
 	
-	//alert( 'block_width: ' + block_width + ' nbr_blocks: ' + nbr_blocks );
 	
 	$('.ss-slider-right-arrow').click(function(){
 		var arrow = $(this);
@@ -32,7 +31,8 @@ jQuery(function($) {
 		
 		var nbr_blocks = Math.floor( view_width/block_width );
 		
-		var slide_distance = (nbr_blocks-1)*block_width;
+		//fix for 1 block wide slider
+		var slide_distance = ( nbr_blocks <= 1 ) ? block_width :(nbr_blocks-1)*block_width;
 		
 		//10 to acccount for extra width of slider
 		var right_stop = -slider_width + nbr_blocks*block_width+10;
@@ -40,8 +40,7 @@ jQuery(function($) {
 		var left_indent = parseInt($('#schedule-slider'+suff).css('left'));
 		
 		left_indent = Math.max( left_indent - slide_distance, right_stop );
-		//alert( 'right arrow left_indent: ' + left_indent + ' #blocks: ' + nbr_blocks );
-		//$('.schedule-slider').css( {'left' : left_indent } );
+		
 		$(slider_id).css( {'left' : left_indent } );
 		
 	});
@@ -60,19 +59,17 @@ jQuery(function($) {
 		var view_width = $('.ss-slider-area'+suff).outerWidth();
 		
 		var nbr_blocks = Math.floor( view_width/block_width );
-		
-		var slide_distance = (nbr_blocks-1)*block_width;
+
+		//fix for 1 block wide slider
+		var slide_distance = ( nbr_blocks <= 1 ) ? block_width :(nbr_blocks-1)*block_width;
 		
 		//10 to acccount for extra width of slider
 		var right_stop = -slider_width + nbr_blocks*block_width + 10;
 
 		var left_indent = parseInt($('#schedule-slider'+suff).css('left'));
-		//alert( 'orig left arrow left_indent: ' + left_indent );
+	
 		left_indent = Math.min( left_indent + slide_distance, left_stop );
 		
-		//alert( 'left arrow left_indent: ' + left_indent + ' #blocks: ' + nbr_blocks );
-		
-		//$('.schedule-slider').css( {'left' : left_indent } );
 		$(slider_id).css( {'left' : left_indent } );
 			
 	});
