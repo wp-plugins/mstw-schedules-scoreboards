@@ -271,6 +271,20 @@ function mstw_ss_add_caps( $role_obj = null, $role_name = null, $cpt, $cpt_s ) {
 			wp_enqueue_style( 'mstw_ss_style' );			
 		} 
 
+		$mstw_ss_custom_stylesheet = get_stylesheet_directory( ) . '/mstw-ss-custom-styles.css';
+		
+		mstw_log_msg( 'custom stylesheet path: ' . $mstw_ss_custom_stylesheet );
+		
+		if ( file_exists( $mstw_ss_custom_stylesheet ) ) {
+			$mstw_ss_custom_stylesheet_url = get_stylesheet_directory_uri( ) . '/mstw-ss-custom-styles.css';
+			mstw_log_msg( 'custom stylesheet uri: ' . $mstw_ss_custom_stylesheet_url );
+			wp_register_style( 'mstw_ss_custom_style', $mstw_ss_custom_stylesheet_url );
+			wp_enqueue_style( 'mstw_ss_custom_style' );
+		}
+		else {
+			mstw_log_msg( 'custom stylesheet: ' . $mstw_ss_custom_stylesheet . ' does not exist.' );
+		}
+		
 		//javascript for slider next and prev arrows
 		wp_enqueue_script( 'ss-slider', MSTW_SS_JS_URL . '/ss-slider.js', array('jquery'), false, true );
 		
