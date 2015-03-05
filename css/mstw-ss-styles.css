@@ -2,7 +2,7 @@
  * MSTW Schedules & Scoreboards Stylesheet [mstw_ss_styles.css]  
  *
  *	MSTW Wordpress Plugins (http://shoalsummitsolutions.com)
- *	Copyright 2014 Mark O'Donnell (mark@shoalsummitsolutions.com)
+ *	Copyright 2014-15 Mark O'Donnell (mark@shoalsummitsolutions.com)
  *
  *	This program is free software: you can redistribute it and/or modify
  *	it under the terms of the GNU General Public License as published by
@@ -20,7 +20,7 @@
  
 /* 
  ************************************************************
- *  THIS FILE IS THE DEFAULT FOR THE GAME SCHEDULES PLUGIN  *
+ *  THIS FILE IS THE DEFAULT FOR THE SCHEDULES & SCOREBOARDS PLUGIN  *
  ************************************************************
  */
  
@@ -32,7 +32,7 @@
  }
  
 /******************************************************
- * Styles for ALL OF GAME SCHEDULES          
+ * Styles for ALL OF SCHEDULES & SCOREBOARDS          
  *****************************************************/ 
 .ss-clear {
 	clear: both;
@@ -552,10 +552,6 @@ div.sb-score, div.sb-status {
 	float: left;
 	margin-right: 15px;
 }
-
-.
-
-
 
 
 /******************************************************/
