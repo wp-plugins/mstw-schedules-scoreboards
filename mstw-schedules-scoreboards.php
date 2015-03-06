@@ -320,10 +320,12 @@ function mstw_ss_plugin_action_links( $links, $file ) {
 
     if ( $file == $this_plugin ) {
         // The "page" query string value must be equal to the slug
-        // of the Settings admin page we defined earlier, which in
-        // this case equals "myplugin-settings".
-        //$settings_link = '<a href="' . get_bloginfo('wpurl') . '/wp-admin/admin.php?page=myplugin-settings">Settings</a>';
-		$settings_link = '<a href="http://calbears.com" target="_blank">Settings</a>';
+        // of the Settings admin page we defined earlier
+		
+		$site_url = site_url( '/wp-admin/edit.php?post_type=mstw_ss_game&page=mstw-ss-settings' );
+		
+		$settings_link = "<a href='$site_url'>Settings</a>";
+		
         array_unshift( $links, $settings_link );
     }
 
