@@ -60,7 +60,9 @@ The current version of MSTW Schedules & Scoreboards has been tested on WP 4.1 wi
 * Corrected bug - schedule sliders with only one game displayed on them slide correctly.
 * Corrected bug - settings link on plugins page now goes to the settings page.
 * Updated CSS stylesheet loading, so customizations can be loaded from a separate file from the plugin's mstw-ss-styles.css. Changes to that file are no longer required, so the plugin upgrade process should be simpler (and safer).
+* Added css tag for home games to all widgets & shortcodes, not just the schedule table.
 * Added four team colors to each team. (For eventual use in several plugins.)
+* Removed some annoying PHP notices from the CDT widget.
 
 = 1.2 =
 * Added a scoreboard 'ticker' shortcode - a slider of games & scores intended for the top of pages. 

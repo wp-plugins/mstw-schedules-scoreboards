@@ -778,6 +778,10 @@ if ( !function_exists( 'mstw_ss_build_team_link' ) ) {
 			//all we need to build the link is the game slug
 			$game_slug = $post->post_name;
 			$ret_url = get_site_url( null, '/game/'.$game_slug, null );
+			
+			mstw_log_msg( 'in ...' );
+			mstw_log_msg( 'site_url: ' . get_site_url( null, '/game/'.$game_slug, null ) );
+			mstw_log_msg( 'home_url: ' . get_home_url( null, '/game/'.$game_slug, null ) );
 
 		}
 		else if ( $link_type == 'team-url' ) {
@@ -1414,7 +1418,8 @@ if ( !function_exists( 'mstw_ss_build_countdown' ) ) {
 		}
 		else {
 			// we found a game, so build the countdown display
-			
+			$home_css_tag = get_post_meta( $game->ID, 'game_is_home_game', true ) ? 'mstw-ss-home' : '';
+			$ret_str .= "<div class = 'mstw-cdt-block $home_css_tag'>";
 			//full date-time group format 
 			$cdt_dtg_format = ( $attribs['cdt_dtg_format'] == 'custom' ? $attribs['custom_cdt_dtg_format'] : $attribs['cdt_dtg_format'] ); 
 			
@@ -1457,6 +1462,8 @@ if ( !function_exists( 'mstw_ss_build_countdown' ) ) {
 			settype($game_dtg, 'integer');
 			$countdown_span = "<span class='mstw-ss-cdt-countdown mstw-ss-cdt-countdown_$sched'>";
 			$ret_str .= $countdown_span . mstw_ss_time_difference( $game_dtg - $current_dtg ) . '</span>';
+			
+			$ret_str .= '</div>';
 		}
 							
 		return $ret_str;

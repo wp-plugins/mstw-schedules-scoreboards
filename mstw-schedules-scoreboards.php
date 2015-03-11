@@ -273,7 +273,7 @@ function mstw_ss_add_caps( $role_obj = null, $role_name = null, $cpt, $cpt_s ) {
 
 		$mstw_ss_custom_stylesheet = get_stylesheet_directory( ) . '/mstw-ss-custom-styles.css';
 		
-		mstw_log_msg( 'custom stylesheet path: ' . $mstw_ss_custom_stylesheet );
+		//mstw_log_msg( 'custom stylesheet path: ' . $mstw_ss_custom_stylesheet );
 		
 		if ( file_exists( $mstw_ss_custom_stylesheet ) ) {
 			$mstw_ss_custom_stylesheet_url = get_stylesheet_directory_uri( ) . '/mstw-ss-custom-styles.css';

@@ -132,7 +132,8 @@ class mstw_ss_cdt_widget extends WP_Widget {
 		}
 	
 		// and merge them with the defaults
-		$new_args = wp_parse_args( $options, mstw_ss_get_defaults( ) );
+		$defaults = array_merge( mstw_ss_get_defaults( ), mstw_ss_get_dtg_defaults( ) );
+		$new_args = wp_parse_args( $options, $defaults );
 		//$output .= '<pre>ARGS:' . print_r( $args, true ) . '</pre>';
 	
 		// then merge the parameters passed to the shortcode with the result									

@@ -50,6 +50,12 @@ function mstw_ss_create_teams_ui( $post ) {
 	$team_logo = get_post_meta( $post->ID, 'team_logo', true );
 	$team_alt_logo = get_post_meta( $post->ID, 'team_alt_logo', true );
 	
+	$team_primary_bkgd_color = get_post_meta( $post->ID, 'team_primary_bkgd_color', true );
+	$team_primary_text_color = get_post_meta( $post->ID, 'team_primary_text_color', true );
+	$team_accent_color_1 = get_post_meta( $post->ID, 'team_accent_color_1', true );
+	$team_accent_color_2 = get_post_meta( $post->ID, 'team_accent_color_2', true );
+
+	
 	$team_sport = get_post_meta( $post->ID, 'team_sport', true );
 	$team_staff = get_post_meta( $post->ID, 'team_staff', true );
 	$team_roster = get_post_meta( $post->ID, 'team_roster', true );
@@ -217,7 +223,43 @@ function mstw_ss_create_teams_ui( $post ) {
 								'label' => __( 'Home Venue:', 'mstw-schedules-scoreboards' ),
 								'options' => $team_venue_options,
 								),
-							'team_divider' => array (
+							'team_color_divider' => array (
+								'type' => 'divider',
+								'curr_value' => sprintf( __( 'These team colors willbe used across the MSTW Framework & Plugins  eventually, starting with Team Rosters. They are a convenience to format various front end displays, but are not required.', 'mstw-schedules-scoreboards' ) ),
+								),
+							'team_primary_bkgd_color' => array (
+								'type'	=> 'text',
+								'curr_value' => $team_primary_bkgd_color,
+								'label' => __( 'Primary Background Color:', 'mstw-schedules-scoreboards' ),
+								'maxlength' => 256,
+								'size' => $std_size,
+								'desc' => __( 'The primary background color used for table header and even row backgrounds.', 'mstw-schedules-scoreboards' ),
+								),
+							'team_primary_text_color' => array (
+								'type'	=> 'text',
+								'curr_value' => $team_primary_text_color,
+								'label' => __( 'Primary Text Color:', 'mstw-schedules-scoreboards' ),
+								'maxlength' => 256,
+								'size' => $std_size,
+								'desc' => __( 'The primary text color used for table header and even row text. Should contrast well with the primary background color.', 'mstw-schedules-scoreboards' ),
+								),
+							'team_accent_color_1' => array (
+								'type'	=> 'text',
+								'curr_value' => $team_accent_color_1,
+								'label' => __( 'Accent Color 1:', 'mstw-schedules-scoreboards' ),
+								'maxlength' => 256,
+								'size' => $std_size,
+								'desc' => __( 'This accent color is used for table odd row backgrounds. Should contrast well with the primary background color.', 'mstw-schedules-scoreboards' ),
+								),
+							'team_accent_color_2' => array (
+								'type'	=> 'text',
+								'curr_value' => $team_accent_color_2,
+								'label' => __( 'Accent Color 2:', 'mstw-schedules-scoreboards' ),
+								'maxlength' => 256,
+								'size' => $std_size,
+								'desc' => __( 'This accent color is used for links & table borders. Preferably should contrast well with at least the primary text color and accent color 1.', 'mstw-schedules-scoreboards' ),
+								),
+							'team_inks_divider' => array (
 								'type' => 'divider',
 								'curr_value' => sprintf( __( 'In this release, the following fields are for use by developers only. They have no impact on the plugin\'s current user interface. %s Read more here. %s', 'mstw-schedules-scoreboards' ), '<a href="http://shoalsummitsolutions.com" target="_blank">', "</a>" ),
 								),
@@ -287,6 +329,13 @@ function mstw_ss_save_team_meta( $post_id, $post ) {
 		
 		update_post_meta( $post_id, 'team_home_venue', sanitize_text_field( esc_attr( mstw_safe_ref( $_POST, 'team_home_venue' ) ) ) );
 		
+		//this is only needed if js color selector is broken and the field defaults
+		//	to text. updates the post meta data or sets error message
+		mstw_ss_sanitize_hex_color( $post_id, $_POST, 'team_primary_bkgd_color' );		
+		mstw_ss_sanitize_hex_color( $post_id, $_POST, 'team_primary_text_color' );
+		mstw_ss_sanitize_hex_color( $post_id, $_POST, 'team_accent_color_1' );
+		mstw_ss_sanitize_hex_color( $post_id, $_POST, 'team_accent_color_2' );
+		
 		update_post_meta( $post_id, 'team_sport', sanitize_text_field( esc_attr( mstw_safe_ref( $_POST, 'team_sport' ) ) ) );
 		
 		update_post_meta( $post_id, 'team_staff', sanitize_text_field( esc_attr( mstw_safe_ref( $_POST, 'team_staff' ) ) ) );
@@ -314,6 +363,35 @@ function mstw_ss_save_team_meta( $post_id, $post ) {
 	}
 	
 } //End: mstw_ss_save_team_meta()
+
+//-----------------------------------------------------------------
+// Simple helper for save_team_meta() above; wrapper for mstw_sanitize_hex_color()
+//	Updates post meta or sets admin error message
+//
+// 	Args: 
+//		$post_id - hex string to test
+//		$post - new post array being saved
+//		$key - key of field in $post & database
+//	Return:
+//		None. Updates the $post_id meta data on success. 
+//		Sets admin error message on failure.
+//
+function mstw_ss_sanitize_hex_color( $post_id, $post, $key ) {
+	
+	//sanitize the input
+	$sanitized_color = mstw_sanitize_hex_color( mstw_safe_ref( $post, $key ) );
+	
+	//save valid setting or display error & revert to last setting
+	if ( $sanitized_color !== null ) {
+		// blank input is valid
+		update_post_meta( $post_id, $key, $sanitized_color );
+	}
+	else  {
+		// there's an error. Don't save new value. Add error message.
+		$msg = sprintf( __( 'Error: %s reset to last valid value.', 'mstw-schedules-scoreboards' ), $key );
+		mstw_ss_add_admin_notice( 'error', $msg );
+	}
+}
 
 //-----------------------------------------------------------------
 // Remove edit permalink line for the mstw_ss_team CPT because

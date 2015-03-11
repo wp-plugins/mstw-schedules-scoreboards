@@ -54,9 +54,13 @@
 					//team_short_mascot
 					$home_team_name = "$full_name $full_mascot";
 					
+					$is_home_game = get_post_meta($post->ID, 'game_is_home_game', true );
+					
+					$home_css_tag = ( $is_home_game ) ? 'mstw-ss-home' : '';
+					
 					//$home_team_obj = get_page_from_slug( 'home-team-slug' );
 					?>
-					<div class="single-game single-game_<?php echo( $home_team_slug ) ?>">
+					<div class="single-game single-game_<?php echo( $home_team_slug ) ?> <?php echo $home_css_tag ?>">
 					<?php
 					$opp_team_slug = get_post_meta( $post->ID, 'game_opponent_team', true );
 					//mstw_log_msg( 'in single-game template ... $opp_team_slug= ' . $opp_team_slug );
@@ -112,8 +116,6 @@
 						//$game_date = date( 'l, d F Y', $unix_timestamp );
 						//$game_time = ( $game_time_tba == '' ) ? date( 'h:i A', $unix_timestamp ) : $game_time_tba;
 						//$date_time_entry = $game_date . ' ' . $game_time;
-						
-						$is_home_game = get_post_meta($post->ID, 'game_is_home_game', true );
 						
 						//location from Venues DB
 						//$venue_slug = get_post_meta($post->ID, 'game_gl_location', true );
@@ -215,7 +217,9 @@
 					
 					<?php } ?>	
 					</div> <!-- .single-game -->
-					</article> <!-- #post-<?php the_ID(); ?> -->			
+					</article> <!-- #post-<?php the_ID(); ?> -->
+
+					<?php comments_template( '', true ); ?>
 
 				<?php endwhile; // end of the loop. ?>
 

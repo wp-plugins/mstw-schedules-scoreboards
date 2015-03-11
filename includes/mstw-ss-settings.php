@@ -5,7 +5,7 @@
  *		Loaded conditioned on is_admin() in mstw-ss-admin.php 
  *
  *	MSTW Wordpress Plugins (http://shoalsummitsolutions.com)
- *	Copyright 2014 Mark O'Donnell (mark@shoalsummitsolutions.com)
+ *	Copyright 2014-15 Mark O'Donnell (mark@shoalsummitsolutions.com)
  *
  *	This program is free software: you can redistribute it and/or modify
  *	it under the terms of the GNU General Public License as published by

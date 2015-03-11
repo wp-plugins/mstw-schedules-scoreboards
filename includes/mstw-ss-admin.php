@@ -315,6 +315,8 @@ function mstw_ss_bulk_post_updated_messages( $messages, $bulk_counts ) {
 add_action( 'admin_enqueue_scripts', 'mstw_ss_admin_enqueue_scripts' );
 
 function mstw_ss_admin_enqueue_scripts( $hook_suffix ) {
+	global $typenow;
+	
 	//mstw_log_msg( '$hook_suffix: ' . $hook_suffix );
 	
 	// This function loads in the required media files for the media manager.
@@ -337,6 +339,24 @@ function mstw_ss_admin_enqueue_scripts( $hook_suffix ) {
 		wp_enqueue_style( 'wp-color-picker' );
 		wp_enqueue_script( 'mstw-ss-color-picker', MSTW_SS_JS_URL . '/ss-color-settings.js', array( 'wp-color-picker' ), false, true );
 		wp_enqueue_script( 'mstw-ss-confirm-reset', MSTW_SS_JS_URL . '/ss-confirm-reset.js', null, false, true );
+	}
+	
+	//mstw_log_msg( 'in mstw_ss_admin_enqueue_scripts ... ' );
+	//mstw_log_msg( '$hook_suffix: ' . $hook_suffix );
+	//mstw_log_msg( '$type: ' . $typenow );
+	
+	//unfortunately post.php is the available hook
+	if ( $hook_suffix == 'post.php' || $hook_suffix == 'post-new.php' ) {
+		//enqueue the datepicker script & stylesheet if it's the game edit page 
+		if( $typenow == 'mstw_ss_game' ) {
+			wp_enqueue_script( 'mstw-ss-date-picker', MSTW_SS_JS_URL . '/ss-date-settings.js', array( 'jquery-ui-datepicker' ), false, true );
+			wp_enqueue_style('jquery-style', MSTW_SS_CSS_URL . '/jquery-ui.css' );
+		}
+		//enqueue the datepicker script & stylesheet if it's the game edit page 
+		else if ( $typenow == 'mstw_ss_team' ) {
+			wp_enqueue_style( 'wp-color-picker' );
+			wp_enqueue_script( 'mstw-ss-team-color-picker', MSTW_SS_JS_URL . '/ss-team-color-settings.js', array( 'wp-color-picker' ), false, true );
+		}
 	}
 	
 	//enqueue the datepicker script & stylesheet

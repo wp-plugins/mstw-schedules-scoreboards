@@ -221,7 +221,10 @@
 		$slider_time_format = ( $slider_time_format == 'custom' ? $custom_slider_time_format : $slider_time_format );
 		
 		$ret = '';
-		$ret .= "<div class='game-block'>\n";
+		
+		$home_css_tag = ( get_post_meta( $game->ID, 'game_is_home_game', true ) ) ? 'mstw-ss-home' : '';
+		
+		$ret .= "<div class='game-block $home_css_tag'>\n";
 		
 			//game date block
 			$ret .= "<div class='date date" . $css_tag . " pad'>\n";
