@@ -1,0 +1,906 @@
+/* 
+ * MSTW Schedules & Scoreboards Stylesheet [mstw_ss_styles.css]  
+ *
+ *	MSTW Wordpress Plugins (http://shoalsummitsolutions.com)
+ *	Copyright 2014-15 Mark O'Donnell (mark@shoalsummitsolutions.com)
+ *
+ *	This program is free software: you can redistribute it and/or modify
+ *	it under the terms of the GNU General Public License as published by
+ *	the Free Software Foundation, either version 3 of the License, or
+ *	(at your option) any later version.
+
+ *	This program is distributed in the hope that it will be useful,
+ *	but WITHOUT ANY WARRANTY; without even the implied warranty of
+ *	MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+ *	GNU General Public License for more details.
+ *
+ *	You should have received a copy of the GNU General Public License
+ *	along with this program. If not, see <http://www.gnu.org/licenses/>.
+ *--------------------------------------------------------------------------*/
+ 
+/* 
+ ************************************************************
+ *  THIS FILE IS THE DEFAULT FOR THE SCHEDULES & SCOREBOARDS PLUGIN  *
+ ************************************************************
+ */
+ 
+ p.sample-code {
+	margin-bottom: .25em;
+	font-family: serif;
+	color: #666;  /* dark gray */
+	font-size: .8em;
+ }
+ 
+/******************************************************
+ * Styles for ALL OF SCHEDULES & SCOREBOARDS          
+ *****************************************************/ 
+.ss-clear {
+	clear: both;
+}
+
+.ss-divider {
+	border-bottom: 2px solid #041E42;
+}
+ 
+/******************************************************
+ * Styles for the SCHEDULE SLIDER SHORTCODE (ss-slider)           
+ *****************************************************/
+
+.ss-slider-area {
+	width: 100%;
+	/*height: 208px;*/
+	line-height: 20px;
+	/*margin-top: 20px;*/
+	background-color: #fff;
+}
+
+.ss-slider {
+	border: 1px solid #B5B5B5;
+}
+
+.ss-one-edge-shadow {
+	-webkit-box-shadow: 0 8px 6px -6px #D2CFCF;
+	-moz-box-shadow: 0 8px 6px -6px #d2cfcf;
+	box-shadow: 0 8px 6px -6px #D2CFCF;
+}
+
+.ss-slider .border {
+	padding: 5px;
+	background: #EAE7E7;
+}
+
+.ss-slider .box { /* WHY IS THIS NEEDED? */
+	background-color: #fff;
+}
+
+.ss-slider .title {
+	font-family: 'Roboto Condensed',Arial, sans-serif;
+	font-weight: bold;
+	color: #041E42;
+	font-size: 18px;
+	line-height: 20px;
+	/*padding: 3px 6px 3px 6px;*/
+	padding:6px;
+	float: left;
+}
+
+.ss-slider .full-schedule-link {
+	/*padding-left: 8px;
+	padding-top: 3px;*/
+	/*padding: 3px 6px 3px 6px;*/
+	padding: 6px;
+	line-height: 20px;
+	color: #041E42;
+	float: left;
+}
+
+.ss-slider .full-schedule-link  a {
+	color: #041E42;
+	font-family: 'Oswald',Arial, sans-serif;
+	text-decoration: underline;
+	font-weight: bold;
+}
+
+.ss-slider .full-schedule-link  a:hover {
+	text-decoration: none;
+}
+
+/*.ss-divider {
+	margin-bottom: 10px;
+}*/
+
+.ss-slider .content {
+	height: 178px;
+	width: 100%;
+	position: relative;
+	overflow: hidden;
+	background-color: #fff;
+}
+
+.schedule-slider  {
+	/*display: none;  ??  */
+	padding-top: 10px;
+	position: absolute;
+	z-index: 1;
+	left: 0;
+	top: 0;
+	width: 3000px;
+	height: 170px;
+	overflow: hidden;
+	/*background-color: #ddd;*/
+}
+
+.ss-slider-right-arrow, .ss-slider-left-arrow {
+	position: absolute;
+	top: 0;
+	z-index: 1;
+	width: 10px;
+	height: 170px;
+	cursor: pointer;
+	display: block;
+	line-height: 170px;
+	font-size: 36px;
+	color: #666;
+}
+
+.ss-slider-right-arrow {
+	right: 0;
+}
+
+.ss-slider-left-arrow {
+	left: 0;
+}
+
+.ss-slider-left-arrow:hover, .ss-slider-right-arrow:hover {
+	background-color: #efefef;
+}
+
+.ss-slider .game-block {
+	float: left;
+	margin: 0;
+	background: rgba(0, 0, 0, 0);
+	width: 187px;
+	text-align: center;
+	color: #0A1E3F;
+}
+
+.game-block .date {
+	width: 90%;
+	margin: 0 auto;
+	text-transform: uppercase;
+	font-size: 18px;
+	font-family: "Roboto Condensed",Arial;
+	font-weight: bold;
+	/*height: 45px;*/
+	/*line-height: 60px;*/
+	border-bottom: 2px solid #FEC92B;
+	color: #0A1E3F;
+	margin-bottom: 10px;
+}
+
+.game-block .game-schedule {
+	width: 90%;
+	margin: 0 auto;
+	text-transform: uppercase;
+	font-size: 14px;
+	font-family: "Roboto Condensed",Arial;
+	font-weight: bold;
+	/*height: 45px;*/
+	/*line-height: 60px;*/
+	color: #FEC92B;
+	background-color: #0A1E3F;
+	margin-bottom: 10px;
+}
+
+.game-block img.mstw-ss-slider-logo {
+	width: 80px;
+	margin: 0 45px;
+}
+
+/*
+.ss-slider .pad {
+	width: 90%;
+	margin: 0 auto;
+}
+*/
+
+.pad {
+	width: 90%;
+	margin: 0 auto;
+}
+
+/*.ss-slider .opponent {*/
+.game-block .opponent {
+	font-size: 1.3em;
+	/*height: 29px;*/
+	/*line-height: 35px;*/
+	color: #0A1E3F;
+	margin-bottom: 10px;
+}
+
+.game-block .opponent a {
+	color: #0A1E3F;
+}
+
+.game-block .opponent a:hover {
+	text-decoration: underline;
+}
+
+.game-block .location {
+	font-size: 1.0em;
+	line-height: 1.2em;
+	margin-bottom: 10px;
+}
+
+.game-block .location  a {
+	color: #0A1E3F;
+}
+
+.game-block .location  a:hover {
+	text-decoration: underline;
+}
+
+.game-block .time-result {
+	font-size: 1.2em;
+	color: #0A1E3F;
+	font-weight: bold;
+}
+
+.game-block .links, .game-block .links a:hover {
+	color: #0A1E3F;
+	font-size: 11px;
+	line-height: 12px;
+	text-decoration: none;
+}
+
+.game-block .links a {
+	color: #0A1E3F;
+	font-size: 11px;
+	text-decoration: underline;
+	line-height: 12px;
+}
+ 
+/******************************************************/
+/* Styles for the SCHEDULE TABLE SHORTCODE  */
+/******************************************************/
+
+.mstw-ss-table {
+    border-collapse: collapse!important;
+    border-spacing: 0px;
+}
+
+/* Set the table header attributes */
+.mstw-ss-table-head thead,  .mstw-ss-table-head tr, .mstw-ss-table-head th {
+    background-color: #4f81bd;
+    color: #fff;
+	/*font-size: 12px;*/
+	line-height: 24px;
+	font-weight: bold;
+	border-spacing: 0px;
+    border: 2px solid white;  /* So the border does not appear */
+    padding: 6px 6px;
+}
+
+
+/* Set the even row attributes */ 
+.mstw-ss-even tr,  .mstw-ss-even td {
+	color: #000;
+	background-color: #b8cce4;
+	border-style: solid; 
+	border-color: #fff; 
+	border-width: 2px;
+	padding: 6px 6px;
+}
+
+/* Set the even links  */
+td.mstw-ss-even a,  td.mstw-ss-even a:visited, td.mstw-ss-even a:active {
+    text-decoration: underline;
+    color: #4F81BD;
+}
+
+/* Set the even links hover */
+.mstw-ss-even td a:hover {
+    text-decoration: none;
+    /*color: #666;*/
+}
+
+/* Set the odd row attributes */
+.mstw-ss-odd tr, .mstw-ss-odd td {
+	color: #000;
+	background-color: #DBE5F1;
+	border-style: solid;
+	border-color: #fff;
+	border-width: 2px;
+	padding: 6px 6px;
+}
+
+/* Set the odd links */
+td.mstw-ss-odd a,  td.mstw-ss-odd a:visited, td.mstw-ss-odd a:active {
+    color: #4F81BD;
+	text-decoration: underline;
+}
+
+/* Set the odd links hover */
+.mstw-ss-odd td a:hover {
+    text-decoration: none;
+    /*color: #666; */
+}
+
+/* Set the home row attributes */
+.mstw-ss-home tr,  .mstw-ss-home td {
+	font-weight: bold!important;
+}
+
+/* Set the home links */
+td.mstw-ss-home a,  td.mstw-ss-home a:visited, td.mstw-ss-home a:active {
+    font-weight: bold!important;
+	text-decoration: underline;
+}
+
+.mstw-ss-home td a:hover {
+    font-weight: bold!important;
+	text-decoration: none;
+}
+
+img.mstw-ss-table-logo {
+	vertical-align: middle;
+	padding-right: 5px;
+}
+
+/******************************************************/
+/* Styles for the SCHEDULE WIDGET  */
+/******************************************************/
+.mstw-ss-sw-tab {
+    border-collapse: collapse!important;
+    border-spacing: 0px;
+}
+
+/* Set the table header attributes */
+.mstw-ss-sw-tab-head thead,  .mstw-ss-sw-tab-head tr, .mstw-ss-sw-tab-head th {
+    background: #4f81bd;
+    color: #fff;
+	border-spacing: 0px;
+    border: 2px solid white;  /* So the border does not appear */
+    padding: 2px 5px 2px 3px;
+}
+
+/* Set the even row attributes */
+.mstw-ss-sw-even tr,  .mstw-ss-sw-even td {
+	color: #000;
+	background-color: #B8CCE4;
+	border-style: solid; 
+	border-color: #fff; 
+	border-width: 2px;
+	padding: 2px 5px 2px 3px!important;
+}
+
+/* Set the even links */
+.mstw-ss-sw-even td a,  .mstw-ss-sw-even td a:visited, .mstw-ss-sw-even td a:active {
+    text-decoration: underline;
+}
+
+.mstw-ss-sw-even td a:hover {
+	text-decoration: none;
+}
+
+/* Set the odd row attributes */
+.mstw-ss-sw-odd tr, .mstw-ss-sw-odd td {
+	color: #000;
+	background-color: #DBE5F1;
+	border-style: solid;
+	border-color: #fff;
+	border-width: 2px;
+	padding: 2px 5px 2px 3px!important;
+}
+
+/* Set the odd links */
+.mstw-ss-sw-odd td a,  .mstw-ss-sw-odd td a:visited, .mstw-ss-sw-odd td a:active {
+    text-decoration: underline;
+}
+
+.mstw-ss-sw-odd td a:hover {
+    text-decoration: none;
+}
+*/
+
+/* Set the home row attributes */
+.mstw-ss-sw-home tr,  .mstw-ss-sw-home td {
+	font-weight: bold!important;
+}
+
+/* Set the home links */
+.mstw-ss-sw-home td a,  .mstw-ss-sw-home td a:visited, .mstw-ss-sw-home td a:active {
+    font-weight: bold!important;
+	text-decoration: underline;
+}
+
+.mstw-ss-sw-home td a:hover {
+	text-decoration: none;
+}
+
+/******************************************************/
+/* Styles for the Countdown Timer shortcode & widget  */
+/******************************************************/
+.mstw-ss-cdt-dtg {
+	color: #000;
+	font-weight: bold;
+	font-family: 'Lucida Sans Unicode', 'Lucida Grande', sans-serif;
+}
+
+.mstw-ss-cdt-opponent, .mstw-ss-cdt-location {
+	color: #000;
+	font-weight: bold;
+	font-family: 'Lucida Sans Unicode', 'Lucida Grande', sans-serif;
+}
+
+.mstw-ss-cdt-opponent a, .mstw-ss-cdt-location a {
+	text-decoration: underline;
+    /*color: #4F81BD;*/
+}
+
+.mstw-ss-cdt-opponent a:hover, .mstw-ss-cdt-location a:hover {
+	text-decoration: none;
+    /*color: #666;*/
+}
+
+.mstw-ss-cdt-intro {
+	color: #000;
+	font-weight: bold;
+	font-family: 'Lucida Sans Unicode', 'Lucida Grande', sans-serif;	
+}
+
+.mstw-ss-cdt-countdown{
+	color: #000;
+	background: #d6d666;
+}
+
+/******************************************************/
+/* Styles for the Single Game template  */
+/******************************************************/
+
+.single-game {
+	margin: 15px;
+	background-color: #ddd;
+	padding: 10px;
+	width: 600px;
+}
+
+.single-game a, .single-game a:visited, .single-game a:active {
+	color: #666;
+	text-decoration: underline;
+}
+
+.single-game a:hover {
+	color: #666;
+	text-decoration: none;
+}
+
+/* right now this is just used for a warning message */
+h2.single-game {
+	color: red;
+	margin: 20px;
+	font-weight: bold;
+	font-size: 1.5rem;
+}
+
+/* DATE-TIME BLOCK */
+.single-game .date-time-block {
+	width: 90%;
+	margin: 0 auto 15px auto;
+	font-size: 2.0rem;
+	font-weight: bold;
+	text-align: center;
+}
+
+/* SCOREBOARD BLOCK (MAIN BLOCK) */
+.single-game .single-game-sb-block {
+	width: 90%;
+	margin: 0 auto 15px auto;
+	font-weight: bold;
+	text-align: center;
+	font-size: 2.0rem;
+}
+
+/* DATA BLOCK - 'VS', SCOREBOARD, OR RESULT */
+.single-game-sb-block .sb-data {
+	width: 30%;
+	float: left;
+	margin: 15px 5%;
+}
+
+.sb-team-block {
+	width: 30%;
+	text-align: center;
+	margin-bottom: 15px;
+	float: left;
+}
+
+.sb-team-block img {
+	margin: 0 45px;
+	width: 80px;
+	height: auto;
+}
+
+div.sb-score, div.sb-status {
+	/*color: #F00;*/
+	text-align: center;
+	font-size: 2.0rem;
+	font-weight: bold;
+	margin: 0;
+	padding: 0;
+}
+
+/* VENUE BLOCK */
+.single-game-venue {
+	clear: both;
+	width: 90%;
+	font-size: 2.0rem;
+	margin: 0 auto 15px auto;
+	text-align: center;
+}
+
+/* MEDIA LINKS BLOCK */
+.single-game-links {
+	clear: both;
+	width: 90%;
+	font-size: 2.0rem;
+	text-align: center;
+	margin: 0 auto 15px auto;
+}
+
+.media-link {
+	float: left;
+	margin-right: 15px;
+}
+
+
+/******************************************************/
+/* Styles for the Scoreboard Gallery  */
+/******************************************************/
+
+/* DATE HEADER ... A BIT SEPARATE */
+h4.sbg-date-header {
+	padding: 2px 6px 6px;
+	margin: 0;
+	font: normal 700 11px Verdana,Arial,Helvetica,sans-serif;
+	color: #454545;
+}
+
+/* GAMES ON A DAY Need this to make game-blocks float properly.*/
+div.sbg-schedule-day-container {
+	width: 700px;
+}
+
+h4.sbg-date-header, .sbg-date-header {
+	color: #000;
+	font-weight: bold;
+}
+
+/* GAME HEADER */
+div.sbg-game-header {
+	background: #3F3F3F url( ../images/sbg-header-bkgd.png ) top left no-repeat;
+	padding: 2px 6px;
+	border-bottom: 1px solid #DFDFDF;
+	height: 1%;
+	overflow: hidden;
+}
+
+div.sbg-header-status {
+	float: left;
+	width: 130px;
+}
+
+p.sbg-header-status, p.sbg-header-score {
+	margin: 0;
+	padding: 0;
+	font-size: 12px;
+	line-height: 15px;
+	font-weight: normal;
+	color: #fff;
+	font-weight: bold;
+}
+
+div.sbg-header-score {
+	float: right;
+}
+
+/* TEAM INFO */
+div.sbg-team {
+	overflow: hidden;
+	clear: both;
+	padding: 6px 6px 6px 0;
+	border-bottom: 1px solid #DFDFDF;
+	/*background: #FEFEFE url(../images/sbg-game-block-bkgd.jpg) top left repeat-x;*/
+	background: #FEFEFE;
+	height: 1%;
+	position: relative;
+}
+
+div.sbg-team.sbg-winner, .sbg-winner {
+	background: rgba(255, 242, 0, 0.290196);
+}
+
+div.sbg-team-logo {
+	float: left;
+	margin-left: 5px;
+	margin-right: 5px;
+}
+
+div.sbg-team-name {
+	float: left;
+	width: 200px;
+	overflow: hidden;
+}
+
+p.sbg-team-name, p.sbg-team-score {
+	font: normal 700 14px Helvetica,Arial,sans-serif;
+	color: #343434;
+	line-height: 28px;
+	padding: 0;
+	margin: 0;
+}
+
+div.sbg-team-score {
+	float: right;
+}
+
+div.sbg-game-block {
+float: left;
+margin-right: 6px;
+position: relative;
+margin-bottom: 10px;
+width: 300px;
+}
+
+@media only screen and (max-width: 650px), only screen and (max-device-width: 650px) {
+	div.sbg-game-block {
+		clear: left;
+	}
+}
+
+/******************************************************/
+/* Styles for the Scoreboard Ticker  */
+/******************************************************/
+div.sbt-schedule-container {
+	width: 541px; /*8 games displayed (8*62 + 35)*/
+	height: 100px;
+	border: none;
+}
+div.sbt-header {
+	width: 100%;
+	font-weight: bold;
+	font-size: 11px;
+	background: #3F3F3F url(../images/sbt-header-bkgd.png ) top left no-repeat;
+	height: 19px;
+	color: #FFF;
+}
+div.sbt-title, div.sbt-link, div.sbt-message {
+	padding: 2px 10px;
+	font-weight: bold;
+}
+
+div.sbt-title {
+	float: left;
+	margin-right: 10px;
+}
+
+div.sbt-link {
+	float: left;
+}
+
+div.sbt-link a, div.sbt-link a:active, div.sbt-link a:visited {
+	color: white;
+	text-decoration: underline;
+}
+
+div.sbt-link a:hover {
+	text-decoration: none;
+}
+
+div.sbt-message {
+	float: right;
+}
+
+div.sbt-ticker-holder {
+	clear: both;
+	position:relative;
+	width: 100%;
+	padding: 0 1px 1px;
+	/*background: #818387;*/
+	/*height: 39px;*/
+	margin-top: 1px;
+	/*border: green 1px solid;*/
+}
+
+div.sbt-prev {
+	background: url("../images/prev.png") no-repeat scroll 0px 0px rgba(0, 0, 0, 0);
+	cursor: pointer;
+	height: 42px;
+	width: 20px;
+	left: 1px;
+	position: absolute;
+	top: 4px;
+}
+
+div.sbt-next {
+	background: url("../images/next.png") no-repeat scroll 0px 0px rgba(0, 0, 0, 0);
+	cursor: pointer;
+	height: 42px;
+	width: 20px;
+	position: absolute;
+	right: 1px;
+	top: 4px;
+	/*margin-left: 5px;*/
+}
+
+div.sbt-ticker-content {
+	/*background: none repeat scroll 0 0 rgba(0, 0, 0, 0);*/
+	/*border: #00f solid 2px;*/
+	/*height: 35px;*/
+	
+	margin: 1px 0 0;
+	overflow: hidden;
+	padding: 1px 0px;
+	top: 0;
+	position: absolute;
+	left: 25px;
+	width: 496px; /*display 8 games by default 8*62 */
+}
+
+div.sbt-ticker-content ul {
+	margin: 0;
+	width: 3100px; /*allows for up to 50 games per ticker*/
+}
+
+div.sbt-ticker-content ul li {
+	width: auto;
+	font-size: 10px;
+	list-style: none;
+	float: left;
+	margin: 2px 5px 2px 0;
+	background: #bbb;
+}
+
+div.sbt-team.sbt-winner {
+	font-weight: 800;
+	color: #000;
+}
+
+div.sbt-game-header {
+	float: left;
+	background: #818181;
+	color: #000;
+	width: 57px;
+}
+
+p.sbt-header-status {
+	float:left;
+	margin: 0;
+	padding: 2px;
+	line-height: 10px;
+	font-weight: 800;
+}
+
+div.sbt-team {
+	clear: both;
+	color: #333;
+	font-weight: bold;
+}
+
+p.sbt-team-name {
+	float:left;
+	margin: 0;
+	padding: 2px;
+	line-height: 10px;
+}
+
+p.sbt-team-score {
+	float:right;
+	margin: 0;
+	padding: 2px;
+	line-height: 10px;
+}
+
+.sbt-ticker-content ul {
+	position: relative;
+	left: 0;
+	top: 0;
+}
+
+
+/******************************************************
+ * Styles for the Game Venues Shortcode  
+ *
+ *  This is really pretty simple. The tables have three 'row types':
+ *	the header row, even rows, and odd rows. For each, you can set:
+ *	1. Text color
+ *	2. Background color
+ *	3. Border style, width, and color
+ *	4. Link attributes - visited, hover, active, etc.
+ *
+ *	You can also control the table borders, padding, etc here as well.
+ /******************************************************/
+ 
+ .mstw-venue-table {
+    border-collapse: collapse!important;
+    border-spacing: 0px;
+}
+
+.mstw-venue-table td, .mstw-venue-table td img {
+	vertical-align: middle;
+}
+
+/* Set the table header styles */
+thead.mstw-venue-table-head {
+	background-color: #4f81bd; /*b8cce4;*/
+	color: #000;
+	font-size: 1em;
+}
+
+thead.mstw-venue-table-head  tr th {
+	border-spacing: 0px;
+    border: 2px solid white;  /* So the border does not appear */
+    padding: 5px!important;
+}
+
+/* Set the even & odd row common styles */
+.mstw-venue-even td , .mstw-venue-odd td  {
+	border-style: solid; 
+	border-color: #fff; 
+	border-width: 2px;
+	padding: 5px;
+	line-height: 1.3em;
+	font-size: 1em;
+}
+
+/* Set the even row styles */
+.mstw-venue-even td {
+	color: #000000;
+	background-color: #b8cce4;
+	
+}
+
+/* Set the even row links */
+.mstw-venue-even td a,  .mstw-venue-even td a:visited, .mstw-venue-even td a:active {
+    text-decoration: underline;
+    color: #000;
+}
+
+.mstw-venue-even td a:hover  {
+	color: #666;
+}
+
+/* Set the odd row attributes */
+.mstw-venue-odd td {
+	color: #000000;
+	background-color: #dbe5f1;
+}
+
+/* Set the odd links */
+.mstw-venue-odd td a,  .mstw-venue-odd td a:visited, .mstw-venue-odd td a:active {
+    text-decoration: underline;
+    color: #000000;
+}
+
+.mstw-venue-odd td a:hover  {
+	color: #666;
+}
+
+/******************************************************/
+/* Styles for the Admin interface					  */
+/******************************************************/
+
+/* colored line dividing sections of admin screens */
+tr.mstw-divider th {
+	border-top: 2px solid #0074A2;
+	padding-top: 5px;
+	margin-top: 20px;
+	font-style: italic;
+}
+
+/* dividers need a spacer because table cells don't do margins */
+tr.mstw-divider-spacer td {
+	line-height: 20px;
+	padding-top: 0;
+	padding-bottom: 0;
+}
