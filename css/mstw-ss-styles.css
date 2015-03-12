@@ -841,6 +841,7 @@ thead.mstw-venue-table-head  tr th {
 	border-spacing: 0px;
     border: 2px solid white;  /* So the border does not appear */
     padding: 5px!important;
+	color: white;
 }
 
 /* Set the even & odd row common styles */
