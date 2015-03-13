@@ -403,7 +403,7 @@ add_action( 'admin_menu', 'mstw_ss_admin_menu' );
 
 function mstw_ss_admin_menu( ) {
 	
-	if ( mstw_user_has_ss_rights( ) ) {	
+	if ( mstw_user_has_plugin_rights( 'ss' ) ) {	
 		//Top Level Menu for Schedules & Scoreboards
 		add_menu_page( 'Schedules & Scoreboards', //$page_title, 
 					   'Schedules & Scoreboards', //$menu_title, 
