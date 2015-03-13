@@ -43,6 +43,8 @@
  * 15. mstw_has_admin_rights - checks is the CURRENT USER has mstw admin rights
  * 16. mstw_user_has_plugin_rights - check if the CURRENT USER has admin rights for
  *									 specified plugin
+ * 16.1 mstw_user_has_ss_rights - FOR COMPATIBILITY ONLY - use mstw_user_has_plugin_rights('ss')
+ *			check if the CURRENT USER has admin rights for MSTW Schedules & Scoreboards plugin
  * 17. mstw_admin_notice - Displays all admin notices; callback for admin_notices action
  * 18. mstw_add_admin_notice - Adds admin notices to transient for display on admin_notices hook
  *----------------------------------------------------------------------------*/
@@ -810,6 +812,22 @@ if ( !function_exists( 'mstw_user_has_plugin_rights' ) ) {
 		return false;
 		
 	} //End: mstw_user_has_plugin_rights( )
+}
+
+//-------------------------------------------------------------------------------
+// 16.1 mstw_user_has_ss_rights - check if the CURRENT USER has 
+//							Schedules & Scoreboards admin rights
+//		ARGUMENTS: 	none
+//		RETURNS: 	true if the current user has rights
+//				 	false otherwise	
+//
+// THIS IS HERE FOR COMPATIBILITY PURPOSES ONLY. 
+// IT CALLS mstw_user_has_plugin_rights()
+//
+if ( !function_exists( 'mstw_user_has_ss_rights' ) ) { 	
+	function mstw_user_has_ss_rights( ) {
+		return mstw_user_has_plugin_rights( 'ss' );
+	} //End: mstw_user_has_ss_rights( )
 }
 
 //----------------------------------------------------------------
