@@ -29,27 +29,8 @@ function mstw_ss_register_cpts( ) {
 	
 	$menu_icon_url = MSTW_SS_IMAGES_DIR .  '/mstw-admin-menu-icon.png';
 			
-	// show ui (or not) based on user's capability
-		
-	// filter default capability so developers can modify
-	//$capability = apply_filters( 'mstw-ss-user_capability', 
-	//							 'edit_others_posts', 
-	//							 'game_schedules_menu' 
-	//							);
-	
 	$capability = 'read';
 		
-	// if filter returns the empty string, someone screwed up; 
-	// use edit_others_posts as default (editor role)
-
-	//if ( $capability == '' )
-		$capability = 'read';
-		
-	// set show_ui based on user and capability
-	//$show_ui = ( current_user_can( $capability ) == true ? true : false );
-	
-	
-
 	//-----------------------------------------------------------------------
 	// register mstw_ss_game custom post type
 	//
@@ -142,7 +123,7 @@ function mstw_ss_register_cpts( ) {
 			'labels'				=> $labels,
 			'public'				=> true,
 			'show_ui'				=> true,
-			'show_in_nav_menus'		=> false,
+			'show_in_nav_menus'		=> true,
 			'show_tagcloud'			=> false,
 			//'meta_box_cb'			=> null, provide callback fcn for meta box display
 			'show_admin_column'		=> true, //allow automatic creation of taxonomy column in associated post-types table.
@@ -150,12 +131,27 @@ function mstw_ss_register_cpts( ) {
 			//'update_count_callback'	=> '',
 			'query_var' 			=> true, 
 			'rewrite' 				=> true,
-			//'capabilities'			=> array( ),
+			'capabilities'			=> array(
+											'manage_terms' => 'manage_ss_scoreboards',
+											'edit_terms' => 'manage_ss_scoreboards',
+											'delete_terms' => 'manage_ss_scoreboards',
+											'assign_terms' => 'manage_ss_scoreboards',
+											),
 			//'sort'					=> null,
 		);
 		
 	register_taxonomy( 'mstw_ss_scoreboard', 'mstw_ss_game', $args );
-
+	register_taxonomy_for_object_type( 'mstw_ss_scoreboard', 'mstw_ss_game' );
+	
+	//mstw_log_msg( 'in mstw-ss-cpts ...' );
+	//if( taxonomy_exists( 'mstw_ss_scoreboard' ) ) {
+	//	$tax = get_taxonomy( 'mstw_ss_scoreboard' );
+	//	mstw_log_msg( $tax->cap );
+	//}
+	//else {
+	//	mstw_log_msg( 'mstw_ss_scoreboard taxonomy does not exist.' );
+	//}
+	
 	//----------------------------------------------------------------------------
 	// register mstw_ss_team post type
 	//
@@ -210,12 +206,13 @@ function mstw_ss_register_cpts( ) {
 		'show_in_admin_bar' => false, //default is value of show_in_menu
 		
 		'menu_icon'     	=> $menu_icon_url,
-		//'show_in_menu' 		=> false, 'edit.php?post_type=scheduled_games',
+		
 		'query_var' 		=> true, //default is 'mstw_ss_schedule',
 		'rewrite' 			=> array(
 			'slug' 			=> 'mstw-ss-schedule',
 			'with_front' 	=> false,
 		),
+		
 		'supports' 			=> array( 'title' ),
 		
 		//post is the default capability type
@@ -250,7 +247,8 @@ function mstw_ss_register_cpts( ) {
 	$args = array(
 		'public' 			=> true,
 		'show_ui'			=> true,
-		'show_in_menu'		=> false, //default is value of show_ui
+		//'show_in_menu'		=> false, //default is value of show_ui
+		'show_in_menu'		=> false,
 		'show_in_admin_bar' => false, //default is value of show_in_menu
 		
 		'menu_icon'     	=> $menu_icon_url,
@@ -291,7 +289,7 @@ function mstw_ss_register_cpts( ) {
 	//
 	
 	$args = array(
-    	'public' => true,
+    	'public' 			=> true,
 		'show_ui'			=> true,
 		'show_in_menu'		=> false, //default is value of show_ui
 		'show_in_admin_bar' => false, //default is value of show_in_menu
@@ -299,14 +297,18 @@ function mstw_ss_register_cpts( ) {
 		'menu_icon'     	=> $menu_icon_url,
 		
         'query_var' => true, //default is mstw_ss_venue
+		
         'rewrite' => array(
-            'slug' => 'mstw-game-venue',
+            'slug' => 'mstw-ss-venue',
             'with_front' => false,
         ),
 		
-        'supports' => array(
-            'title'
-        ),
+        'supports' => array( 'title' ),
+		
+		//post is the default capability type
+		'capability_type'	=> array( 'venue', 'venues' ),
+
+		'map_meta_cap' 		=> true,		
 		
         'labels' => array(
             'name' => __( 'Venues', 'mstw-schedules-scoreboards' ),
@@ -352,7 +354,8 @@ function mstw_ss_register_cpts( ) {
 			'labels'				=> $labels,
 			'public'				=> true,
 			'show_ui'				=> true,
-			'show_in_nav_menus'		=> false,
+			'show_in_menu'			=> true,
+			'show_in_nav_menus'		=> true,
 			'show_tagcloud'			=> false,
 			//'meta_box_cb'			=> null, provide callback fcn for meta box display
 			'show_admin_column'		=> true, //allow automatic creation of taxonomy column in associated post-types table.
@@ -360,7 +363,12 @@ function mstw_ss_register_cpts( ) {
 			//'update_count_callback'	=> '',
 			'query_var' 			=> true, 
 			'rewrite' 				=> true,
-			//'capabilities'			=> array( ),
+			'capabilities'			=> array(
+											'manage_terms' => 'manage_ss_venues',
+											'edit_terms' => 'manage_ss_venues',
+											'delete_terms' => 'manage_ss_venues',
+											'assign_terms' => 'manage_ss_venues',
+											),
 			//'sort'					=> null,
 			
 			'show_tagcloud' 		=> false
@@ -368,6 +376,17 @@ function mstw_ss_register_cpts( ) {
 		
 	register_taxonomy( 'mstw_ss_venue_group', 'mstw_ss_venue', $args );
 	register_taxonomy_for_object_type( 'mstw_ss_venue_group', 'mstw_ss_venue' );
+	
+	global $wp_taxonomies;
+	
+	//mstw_log_msg( 'in mstw-ss-cpts ...' );
+	//if( taxonomy_exists( 'mstw_ss_venue_group' ) ) {
+		//$tax = get_taxonomy( 'mstw_ss_venue_group' );
+		//mstw_log_msg( $tax->cap );
+	//}
+	//else {
+		//mstw_log_msg( 'mstw_ss_venue_group taxonomy does not exist.' );
+	//}
 
 } //End: mstw_ss_register_cpts( )
 ?>
